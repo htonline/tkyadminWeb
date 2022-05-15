@@ -21,33 +21,27 @@
         <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
         <el-table-column prop="tunnelLength" label="隧道长度" />
         <el-table-column  label="附件材料" width="150px" align="center">
-          <template slot-scope="scopes">
+          <template slot-scope="scope">
             <el-button
               class="filter-item"
               size="mini"
               type="info"
               icon="el-icon-search"
               style="color: #f3ecec"
-              @click="look(scopes.row)"
+              @click="look(scope.row)"
             >查看</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="170px" align="center" prop="beizhu4">
-          <template slot-scope="scope">
-            <el-button     v-permission="['admin','tunnelInformation:updateStatus']" style="margin-left: 3px" type="text"  @click="updateStatus(scope.row,scope.row.beizhu4)">
-                {{ scope.row.beizhu4}}
-            </el-button>
-          </template>
-        </el-table-column>
+        <el-table-column label="状态" width="170px" align="center" prop="beizhu4"/>
         <el-table-column  label="操作" width="150px" align="center">
-          <template slot-scope="scopes">
+          <template slot-scope="scope">
             <el-button
               class="filter-item"
               size="mini"
-              type="success"
+              type="warning"
               icon="el-icon-tickets"
-              style="color: #7d4119"
-              @click="askBaojian(scopes.raw)"
+              style="color: #aa0fa7"
+              @click="askBaojian(scope.row)"
             >申请报检</el-button>
           </template>
         </el-table-column>
@@ -97,8 +91,8 @@
           <el-table-column prop="createTime" label="上传日期" />
         </el-table>
       </el-dialog>
-      <el-dialog :close-on-click-modal="false"  :visible.sync="BaojianDialog" title="新增报检单" width="1000px">
-        <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
+      <el-dialog :close-on-click-modal="false"  :visible.sync="BaojianDialog" title="新增报检单" width="1000px" :show-close="false">
+        <el-form ref="defaultForms"  :model="defaultForms" :rules="rules"   size="small" label-width="80px">
           <el-row>
             <div>
               <el-divider>隧道基本信息</el-divider>
@@ -108,19 +102,19 @@
             <el-col :span="7">
               <el-form-item >
                 <div class="sub-title">项目名称</div>
-                <el-input v-model="form.projectName" style="width: 250px;" />
+                <el-input v-model="defaultForms.projectName" style="width: 250px;" ></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item >
                 <div class="sub-title">标段名称</div>
-                <el-input v-model="form.sectionName" style="width: 250px;" />
+                <el-input v-model="defaultForms.sectionName" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item >
                 <div class="sub-title">隧道名称</div>
-                <el-input v-model="form.tunnelName" style="width: 250px;" />
+                <el-input v-model="defaultForms.tunnelName" style="width: 250px;" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -128,19 +122,19 @@
             <el-col :span="7">
               <el-form-item >
                 <div class="sub-title">工点名称</div>
-                <el-input v-model="form.worksiteName" style="width: 250px;" />
+                <el-input v-model="defaultForms.worksiteName" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item >
                 <div class="sub-title">待检区段起始里程</div>
-                <el-input v-model="form.testStartingDistance" style="width: 250px;" />
+                <el-input v-model="defaultForms.beizhu2" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item >
                 <div class="sub-title">待检区段结束里程</div>
-                <el-input v-model="form.testEndingDistance" style="width: 250px;" />
+                <el-input v-model="defaultForms.beizhu3" style="width: 250px;" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -148,7 +142,7 @@
             <el-col :span="8">
               <el-form-item >
                 <div class="sub-title">待检区段长度</div>
-                <el-input v-model="form.testLength" style="width: 250px;" />
+                <el-input v-model="defaultForms.beizhu4" style="width: 250px;" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -161,19 +155,19 @@
             <el-col :span="7">
               <el-form-item >
                 <div class="sub-title">围岩类型</div>
-                <el-input v-model="form.wallRockType" style="width: 250px;" />
+                <el-input v-model="defaultForms.wallRockType" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">初支厚度(cm)</div>
-                <el-input v-model="form.supportTickness" style="width: 250px;" />
+                <el-input v-model="defaultForms.supportTickness" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">间距(m/榀)</div>
-                <el-input v-model="form.separationDistance" style="width: 250px;" />
+                <el-input v-model="defaultForms.separationDistance" style="width: 250px;" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -181,19 +175,19 @@
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">钢筋网间距(cm)</div>
-                <el-input v-model="form.meshDistance" style="width: 250px;" />
+                <el-input v-model="defaultForms.meshDistance" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">环向钢筋间距(cm)</div>
-                <el-input v-model="form.annularBarDistance" style="width: 250px;" />
+                <el-input v-model="defaultForms.annularBarDistance" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">钢筋保护厚度(mm)</div>
-                <el-input v-model="form.reinforPrtTickness" style="width: 150px;" />
+                <el-input v-model="defaultForms.reinforPrtTickness" style="width: 150px;" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -201,25 +195,25 @@
             <el-col :span="6">
             <el-form-item label="">
               <div class="sub-title">二次衬砌厚度(cm):拱部</div>
-              <el-input v-model="form.secLineArchTickness" style="width: 150px;" />
+              <el-input v-model="defaultForms.secLineArchTickness" style="width: 150px;" />
             </el-form-item>
             </el-col>
               <el-col :span="6">
             <el-form-item label="">
               <div class="sub-title">二次衬砌厚度(cm):边墙</div>
-              <el-input v-model="form.secLineWallTickness" style="width: 150px;" />
+              <el-input v-model="defaultForms.secLineWallTickness" style="width: 150px;" />
             </el-form-item>
               </el-col>
                 <el-col :span="6">
             <el-form-item label="">
               <div class="sub-title">二次衬砌厚度(cm):仰拱</div>
-              <el-input v-model="form.secLineInverArchTickness" style="width: 150px;" />
+              <el-input v-model="defaultForms.secLineInverArchTickness" style="width: 150px;" />
             </el-form-item>
                 </el-col>
             <el-col :span="6">
             <el-form-item label="">
               <div class="sub-title">二次衬砌厚度(cm):填充</div>
-              <el-input v-model="form.secLineFilerTickness" style="width: 150px;" />
+              <el-input v-model="defaultForms.secLineFilerTickness" style="width: 150px;" />
             </el-form-item>
             </el-col>
           </el-row>
@@ -231,26 +225,41 @@
           <el-row >
             <el-col :span="5">
               <el-form-item >
-                <div class="sub-title">施工单位</div>
-                <el-input v-model="form.sectionName" style="width: 180px;" />
+                <div class="sub-title" >施工单位</div>
+                <el-input v-model="defaultForms.beizhu5" style="width: 180px;" >{{ user.nickName }}</el-input>
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item >
                 <div class="sub-title">联系人</div>
-                <el-input v-model="form.tunnelName" style="width: 180px;" />
+                <el-input v-model="defaultForms.beizhu6" style="width: 180px;" >{{ user.username }}</el-input>
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item >
                 <div class="sub-title">联系方式</div>
-                <el-input v-model="form.worksiteName" style="width: 180px;" />
+                <el-input v-model="defaultForms.beizhu7" style="width: 180px;" />
               </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item >
                 <div class="sub-title">检测单位</div>
-                <el-input v-model="form.worksiteName" style="width: 170px;" />
+                <!-- <el-input v-model="defaultForms.beizhu8" style="width: 170px;" />   -->
+                <el-select
+                  v-model="defaultForms.beizhu8"
+                placeholder="选择检测单位"
+                clearable
+              @focus="handleQuery"
+                  style="width: 170px;"
+                >
+                <el-option
+                  v-for="item in dishesInfoList"
+                  :key="item.nickName"
+                  :value="item.nickName"
+                  :label="item.nickName"
+                >
+                </el-option>
+                </el-select>
               </el-form-item>
             </el-col>
           </el-row>
@@ -258,26 +267,55 @@
               <el-col :span="5">
                 <el-form-item >
                   <div class="sub-title">监理单位</div>
-                  <el-input v-model="form.testStartingDistance" style="width: 180px;" />
+                 <!-- <el-input v-model="defaultForms.beizhu9" style="width: 180px;" /> -->
+                  <el-select
+                    v-model="defaultForms.beizhu9"
+                    placeholder="选择监理单位"
+                    clearable
+                    @focus="handleQuery1"
+                    style="width: 170px;"
+                  >
+                    <el-option
+                      v-for="item in dishesInfoList1"
+                      :key="item.nickName"
+                      :value="item.nickName"
+                      :label="item.nickName"
+                    >
+                    </el-option>
+                  </el-select>
                 </el-form-item>
               </el-col>
             <el-col :span="4">
               <el-form-item >
-                <div class="sub-title">检测方法</div>
-                <el-input v-model="form.testEndingDistance" style="width: 150px;" />
+                <div class="sub-title">检测方式</div>
+                <el-select v-model="defaultForms.beizhu10" clearable placeholder="请选择" style="width: 150px;" >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="4">
               <el-form-item >
-                <div class="sub-title">检测方式</div>
-                <el-input v-model="form.testStartingDistance" style="width: 150px;" />
+                <div class="sub-title">检测方法</div>
+                <el-select v-model="defaultForms.beizhu11" clearable placeholder="请选择" style="width: 150px;" >
+                  <el-option
+                    v-for="item in options1"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">申请检测时间</div>
                 <el-date-picker
-                  v-model="form.testTime"
+                  v-model="defaultForms.testTime"
                   type="datetime"
                   placeholder="选择日期时间">
                 </el-date-picker>
@@ -285,102 +323,49 @@
             </el-col>
           </el-row>
           <el-row>
-            <el-col :span="2">
-              <el-form-item label="起始里程">
-                <el-input  style="width: 60px;" disabled value="DK" />
+
+            <el-col :span="5">
+              <el-form-item label="">
+                <div class="sub-title">检测部位</div>
+                <el-input v-model="defaultForms.beizhu12" style="width: 150px;" />
               </el-form-item>
             </el-col>
-            <el-col :span="2">
+            <!--
+            <el-col :span="6">
               <el-form-item label="">
-              <el-input v-model="form.beizhu1" style="width: 60px;" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="1">
-              <el-input v-model="form.beizhu5" style="width: 60px;" />
-            </el-col>
-          </el-row>
-          <el-row >
-            <el-col :span="4">
-            <el-form-item label="">
-              <div class="sub-title">起始里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu1" style="width: 60px;" /><span> + </span><el-input v-model="form.beizhu5" style="width: 60px;" />
-            </el-form-item>
-            </el-col>
-            <el-col :span="4">
-            <el-form-item label="">
-              <div class="sub-title">结束里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu2" style="width: 140px;" /><span> + </span><el-input v-model="form.beizhu6" style="width: 60px;" />
-            </el-form-item>
-            </el-col>
-            <el-col :span="4">
-            <el-form-item label="">
-              <div class="sub-title">检测长度</div>
-              <el-input v-model="form.tunnelLength" style="width: 370px;" />
-            </el-form-item>
-            </el-col>
-            <el-col :span="4">
-              <el-form-item label="">
-                <div class="sub-title">浇筑时间</div>
+                <div class="sub-title">隧道浇筑时间</div>
                 <el-date-picker
-                  v-model="form.testTime"
+                  v-model="defaultForms.beizhu12"
                   type="datetime"
                   placeholder="选择日期时间">
                 </el-date-picker>
               </el-form-item>
             </el-col>
+            -->
+            <el-col :span="7">
+            <el-form-item label="">
+              <div class="sub-title">起始里程</div>
+              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.testStartingDistance" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" />
+            </el-form-item>
+            </el-col>
+            <el-col :span="7">
+            <el-form-item label="">
+              <div class="sub-title">结束里程</div>
+              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.testEndingDistance" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" />
+            </el-form-item>
+            </el-col>
+            <el-col :span="5">
+              <el-form-item label="">
+                <div class="sub-title">检测长度</div>
+                <el-input v-model="defaultForms.testLength" style="width: 120px;" />
+              </el-form-item>
+            </el-col>
           </el-row>
 
-          <!--
-          <el-form-item label="beizhu1">
-            <el-input v-model="form.beizhu1" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu2">
-            <el-input v-model="form.beizhu2" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu3">
-            <el-input v-model="form.beizhu3" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu4">
-            <el-input v-model="form.beizhu4" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu5">
-            <el-input v-model="form.beizhu5" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu6">
-            <el-input v-model="form.beizhu6" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu7">
-            <el-input v-model="form.beizhu7" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu8">
-            <el-input v-model="form.beizhu8" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu9">
-            <el-input v-model="form.beizhu9" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu10">
-            <el-input v-model="form.beizhu10" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu11">
-            <el-input v-model="form.beizhu11" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu12">
-            <el-input v-model="form.beizhu12" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu13">
-            <el-input v-model="form.beizhu13" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu14">
-            <el-input v-model="form.beizhu14" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="beizhu15">
-            <el-input v-model="form.beizhu15" style="width: 370px;" />
-          </el-form-item>
-          -->
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button type="text" @click="cancelCU">取消</el-button>
-          <el-button :loading="crud.status.cu === 2" type="primary" @click="crud.submitCU">确认</el-button>
+          <el-button type="text" @click="cancelCU()">取消</el-button>
+          <el-button :loading="crud.status.cu === 2" type="primary" @click="submitForm(defaultForms)">提交报检单</el-button>
         </div>
       </el-dialog>
 
@@ -389,6 +374,7 @@
 
 <script>
 import crudTunnelInformation from '@/api/system/tunnelInformation'
+import store from '@/store'
 import CRUD, { presenter, header, form, crud } from '@crud/crud'
 import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
@@ -397,6 +383,7 @@ import pagination from '@crud/Pagination'
 import { mapGetters } from 'vuex'
 import { getToken } from '@/utils/auth'
 import { select, changeStatue, selectByStatueFenye, selectByStatue, selectByTunnelName } from '@/api/system/tunnelInformation'
+import { createTest, editForm, delForm, listDishesInfo, listDishesInfo1 } from '@/api/system/testInformation'
 
 const defaultForm = { tunnelInforId: null, projectName: null, sectionName: null, tunnelId: null, tunnelName: null, worksiteName: null, tunnelStartingDistance: null, tunnelEndingDistance: null, tunnelLength: null, repairCompany: null, supervisionCompany: null, detectionCompany: null, constructionCompany: null, userId: null, userName: null, deptId: null, time: null, beizhu1: null, beizhu2: null, beizhu3: null, beizhu4: null, beizhu5: null, beizhu6: null, beizhu7: null, beizhu8: null, beizhu9: null, beizhu10: null, beizhu11: null, beizhu12: null, beizhu13: null, beizhu14: null, beizhu15: null }
 export default {
@@ -408,10 +395,69 @@ export default {
   },
   data() {
     return {
+      defaultForms: {
+        testInforId: null,
+        testId: null,
+        testTime: null,
+        testStartingDistance: null,
+        testEndingDistance: null,
+        testLength: null,
+        wallRockType: null,
+        supportTickness: null,
+        separationDistance: null,
+        meshDistance: null,
+        annularBarDistance: null,
+        reinforPrtTickness: null,
+        secLineArchTickness: null,
+        secLineWallTickness: null,
+        secLineInverArchTickness: null,
+        secLineFilerTickness: null,
+        projectName: null,
+        sectionName: null,
+        tunnelName: null,
+        worksiteName: null,
+        statute: null,
+        beizhu1: null,
+        beizhu2: null,
+        beizhu3: null,
+        beizhu4: null,
+        beizhu5: null,
+        beizhu6: null,
+        beizhu7: null,
+        beizhu8: null,
+        beizhu9: null,
+        beizhu10: null,
+        beizhu11: null,
+        beizhu12: null,
+        beizhu13: null,
+        beizhu14: null,
+        beizhu15: null
+      },
+      dishesInfoList: [],
+      dishesInfoList1: [],
+      options: [{
+        value: '自检',
+        label: '自检'
+      }, {
+        value: '第三方',
+        label: '第三方'
+      }],
+      options1: [{
+        value: '地质雷达法',
+        label: '地质雷达法'
+      }, {
+        value: '瞬变电磁法',
+        label: '瞬变电磁法'
+      },
+      {
+        value: '其他',
+        label: '其他'
+      }],
       BaojianDialog: false,
       dialog: false,
       DataList: [],
       Data: [],
+      DataForm: [],
       TunnelDialog: false,
       headers: { 'Authorization': getToken() },
       th: '',
@@ -442,6 +488,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'user',
       'baseApi',
       'fileUploadApi'
     ])
@@ -456,6 +503,27 @@ export default {
     [CRUD.HOOK.beforeRefresh]() {
       return true
     },
+    handleQuery() {
+      listDishesInfo().then(response => {
+        this.dishesInfoList = response
+      })
+    },
+    handleQuery1() {
+      listDishesInfo1().then(response => {
+        this.dishesInfoList1 = response
+      })
+    },
+    cancelCU() {
+      this.BaojianDialog = false
+      delForm(this.defaultForms.testInforId).then(response => {
+      })
+    },
+    submitForm(formName) {
+      editForm(formName).then(response => {
+        this.BaojianDialog = false
+        this.crud.notify('提交成功', CRUD.NOTIFICATION_TYPE.SUCCESS)
+      })
+    },
     serach() {
       if (this.$refs.tunnelName.value.trim().length <= 0) {
         selectByStatue().then(response => {
@@ -467,7 +535,13 @@ export default {
         })
       }
     },
-    askBaojian(data){
+    askBaojian(data) {
+      createTest(data).then(response => {
+        this.defaultForms = response
+        this.defaultForms.beizhu5 = this.user.nickName
+        this.defaultForms.beizhu6 = this.user.username
+        this.defaultForms.beizhu7 = this.user.phone
+      })
       this.BaojianDialog = true
     },
     // 上传文件
@@ -477,7 +551,7 @@ export default {
       })
       this.TunnelDialog = true
     },
-    cancelCU() {
+    cancelCUs() {
       this.TunnelDialog = false
       this.BaojianDialog = false
     },
@@ -492,65 +566,8 @@ export default {
     },
     handleAvatarSuccess(file) {
       console.log(file)
-    },
-    // 上传文件
-    upload() {
-      this.$refs.upload.submit()
-    },
-    beforeUpload(file) {
-      let isLt2M = true
-      isLt2M = file.size / 1024 / 1024 < 100
-      if (!isLt2M) {
-        this.loading = false
-        this.$message.error('上传文件大小不能超过 100MB!')
-      }
-      this.form.name = file.name
-      console.log(file.name)
-      return isLt2M
-    },
-    beforesubmit(response, file, fileList) {
-      this.$refs.upload.clearFiles()
-    },
-    handleSuccess(response, file, fileList) {
-      this.crud.notify('上传成功', CRUD.NOTIFICATION_TYPE.SUCCESS)
-      this.changeVersion(response)
-      this.$refs.upload.clearFiles()
-    },
-    // 监听上传失败
-    handleError(e, file, fileList) {
-      const msg = JSON.parse(e.message)
-      this.$notify({
-        title: msg.message,
-        type: 'error',
-        duration: 2500
-      })
-    },
-    // 改变状态
-    updateStatus(data, status) {
-      if (status === '未发布') {
-        this.$confirm('是否发布隧道信息？', '是否继续？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          changeStatue(data).then(res => {
-            this.crud.toQuery()
-            this.crud.notify('发布成功', CRUD.NOTIFICATION_TYPE.SUCCESS)
-          })
-        })
-      } else {
-        this.$confirm('是否取消发布隧道信息？', '是否继续？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          changeStatue(data).then(res => {
-            this.crud.toQuery()
-            this.crud.notify('已取消发布', CRUD.NOTIFICATION_TYPE.SUCCESS)
-          })
-        })
-      }
     }
+
   }
 }
 </script>

@@ -40,9 +40,10 @@
     </el-form>
     <!--  底部 -->
     <div v-if="$store.state.settings.showFooter" id="el-login-footer">
-      <span v-html="$store.state.settings.footerTxt" />
+     <!-- <span v-html="$store.state.settings.footerTxt" />-->
       <span> ⋅ </span>
-      <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{ $store.state.settings.caseNumber }}</a>
+      <!--<a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{ $store.state.settings.caseNumber }}</a> -->
+      <a href="" target="_blank">备案号</a>
     </div>
 
   </div>

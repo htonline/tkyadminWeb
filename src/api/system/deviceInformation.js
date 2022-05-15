@@ -23,5 +23,18 @@ export function edit(data) {
     data
   })
 }
-
-export default { add, edit, del }
+export function selectPhotos(data) {
+  return request({
+    url: 'api/deviceInformation/selectPhotos',
+    method: 'post',
+    data
+  })
+}
+export function selectdeviceCertificate(data) {
+  return request({
+    url: 'api/deviceInformation/selectdeviceCertificate',
+    method: 'post',
+    data
+  })
+}
+export default { add, edit, del, selectPhotos, selectdeviceCertificate }

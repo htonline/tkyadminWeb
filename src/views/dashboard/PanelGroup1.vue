@@ -10,7 +10,7 @@
           <div class="card-panel-text">
             隧道总数量（座）
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th1" :duration="2000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -23,7 +23,7 @@
           <div class="card-panel-text">
             隧道总长度（米）
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th2" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -36,7 +36,7 @@
           <div class="card-panel-text">
             已施工进度（米）
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th3" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -49,7 +49,7 @@
           <div class="card-panel-text">
             已报检总长度（米）
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th4" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -62,7 +62,7 @@
           <div class="card-panel-text">
             已检测进度（米）
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th5" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -75,7 +75,7 @@
           <div class="card-panel-text">
             已处置缺陷（个）
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th6" :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -88,7 +88,7 @@
           <div class="card-panel-text">
             未处置缺陷（个）
           </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th7" :duration="3200" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -112,8 +112,28 @@
 import CountTo from 'vue-count-to'
 
 export default {
+  data() {
+    return {
+      th1: 0,
+      th2: 0,
+      th3: 0,
+      th4: 0,
+      th5: 0,
+      th6: 0,
+      th7: 0
+    }
+  },
   components: {
     CountTo
+  },
+  mounted: function() {
+    this.th1 = 12000
+    this.th2 = 7832
+    this.th3 = 8920
+    this.th4 = 3803
+    this.th5 = 6693
+    this.th6 = 2036
+    this.th7 = 12006
   },
   methods: {
     handleSetLineChartData(type) {
