@@ -352,6 +352,38 @@
 
         <el-table-column prop="" label="状态" />
         -->
+        <el-table-column prop="beizhu26" label="检测报告" >
+          <template slot-scope="scope">
+            <el-button mutilline="true" type="text" @click="updateDetectionSummaryDialog(scope.row)">上传</el-button>
+            <el-button mutilline="true" type="text" @click="downloadDetectionSummary(scope.row,scope.row.beizhu26)">下载</el-button>
+            {{ scope.row.beizhu26 }}
+            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadDetectionSummaryDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+              <el-form ref="form" :model="form" size="small" label-width="80px">
+                <el-form-item label="上传">
+                  <!--   上传文件   -->
+                  <el-upload
+                    ref="upload"
+                    :limit="1"
+                    :before-upload="beforeUpload"
+                    :auto-upload="false"
+                    :headers="headers"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
+                    :action=updateDetectionSummaryPath
+                    :data="{data:dataid}"
+                  >
+                    <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
+                    <div slot="tip" class="el-upload__tip">可上传任意格式文件，且不超过100M</div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button type="text" @click="cancel()">取消</el-button>
+                <el-button type="primary" @click="upload">确认</el-button>
+              </div>
+            </el-dialog>
+          </template>
+        </el-table-column>
         <el-table-column prop="projectName" label="项目名称" />
         <el-table-column prop="sectionName" label="标段名称" />
         <el-table-column prop="tunnelName" label="隧道名称" />
@@ -1618,7 +1650,9 @@ import { edit, createTest, editForm, delForm, listDishesInfo, listDishesInfo1, c
 import { mapGetters } from 'vuex'
 import { select, changeStatue, selectByStatueFenye, selectByStatue, selectByTunnelName } from '@/api/system/tunnelInformation'
 import { getToken } from '@/utils/auth'
-
+import { downloadFileRaw } from '@/utils/index'
+import { generator } from '@/api/system/testInformation'
+const baseUrl = process.env.VUE_APP_BASE_API === '/' ? '' : process.env.VUE_APP_BASE_API
 const defaultForm = { testInforId: null, testId: null, testTime: null, testStartingDistance: null, testEndingDistance: null, testLength: null, wallRockType: null, supportTickness: null, separationDistance: null, meshDistance: null, annularBarDistance: null, reinforPrtTickness: null, secLineArchTickness: null, secLineWallTickness: null, secLineInverArchTickness: null, secLineFilerTickness: null, projectName: null, sectionName: null, tunnelName: null, worksiteName: null, statute: null, beizhu1: null, beizhu2: null, beizhu3: null, beizhu4: null, beizhu5: null, beizhu6: null, beizhu7: null, beizhu8: null, beizhu9: null, beizhu10: null, beizhu11: null, beizhu12: null, beizhu13: null, beizhu14: null, beizhu15: null }
 export default {
   name: 'TestInformation',
@@ -1744,6 +1778,7 @@ export default {
         beizhu28: null,
         beizhu29: null
       },
+      dataid: -1,
       TestShenHeDialog: false,
       openTuneldialog: false,
       BaojianDialog: false,
@@ -1755,6 +1790,8 @@ export default {
       DataForm: [],
       TunnelDialog: false,
       TunnelInfoDialog: false,
+      updateDetectionSummaryPath: baseUrl + '/api/testInformation/updateBeiZhu26',
+      uploadDetectionSummaryDialogIs: false,
       headers: { 'Authorization': getToken() },
       th: '',
       dishesInfoList: [],
@@ -2027,8 +2064,53 @@ export default {
       this.shigongdanweiShenHeDialog = false
       this.jianlidanweishenheDialog = false
       this.TestShenHeDialog = false
-    }
-
+    },
+    updateDetectionSummaryDialog(data){
+      this.dataid = data.testInforId
+      this.uploadDetectionSummaryDialogIs = true
+    },
+    upload() {
+      this.$refs.upload.submit()
+    },
+    beforeUpload(file) {
+      let isLt2M = true
+      isLt2M = file.size / 1024 / 1024 < 100
+      if (!isLt2M) {
+        this.loading = false
+        this.$message.error('上传文件大小不能超过 100MB!')
+      }
+      this.form.name = file.name
+      console.log(file.name)
+      return isLt2M
+    },
+    // beforesubmit(response, file, fileList) {
+    //   this.$refs.upload.clearFiles()
+    // },
+    handleSuccess(response, file, data) {
+      // data.detectionPhotos = response.data
+      // edit(data)
+      this.crud.notify('上传成功', CRUD.NOTIFICATION_TYPE.SUCCESS)
+      // this.changeVersion(response, 1)
+      this.$refs.upload.clearFiles()
+    },
+    // 监听上传失败
+    handleError(e, file, fileList) {
+      const msg = JSON.parse(e.message)
+      this.$notify({
+        title: msg.message,
+        type: 'error',
+        duration: 2500
+      })
+    },
+    cancel(){
+      this.uploadPhotoDialog = false
+    },
+    downloadDetectionSummary(data,name) {
+      // 打包下载
+      generator(data, -2).then(data => {
+        downloadFileRaw(data, name)
+      })
+    },
   }
 }
 </script>

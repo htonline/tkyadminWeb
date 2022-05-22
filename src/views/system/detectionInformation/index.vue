@@ -157,10 +157,103 @@
         <el-table-column prop="testId" label="报检号" />
         <el-table-column prop="detectionLineBiaohao" label="测线编号" />
         <el-table-column prop="detectionData" label="检测数据-上传/下载" />
-        <el-table-column prop="detectionPhotos" label="现场照片-上传/下载" />
-        <el-table-column prop="radarPhotos" label="雷达图谱-上传/下载" />
-        <el-table-column prop="detectionSummary" label="检测报告_上传/下载" />
-        <el-table-column prop="others" label="其他附件_上传/下载" />
+        <el-table-column prop="detectionPhotos" label="现场照片-上传/下载"></el-table-column>
+        <el-table-column prop="radarPhotos" label="雷达图谱-上传/下载" >
+          <template slot-scope="scope">
+            <el-button mutilline="true" type="text" @click="updateRadarPhotosDialog(scope.row)">上传</el-button>
+            <el-button mutilline="true" type="text" @click="downloadRadarPhotos(scope.row,scope.row.radarPhotos)">下载</el-button>
+            {{ scope.row.radarPhotos }}
+            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadRadarDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+              <el-form ref="form" :model="form" size="small" label-width="80px">
+                <el-form-item label="上传">
+                  <!--   上传文件   -->
+                  <el-upload
+                    ref="upload"
+                    :limit="1"
+                    :before-upload="beforeUpload"
+                    :auto-upload="false"
+                    :headers="headers"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
+                    :action=updateRadarPhotoPath
+                    :data="{data:dataid}"
+                  >
+                    <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
+                    <div slot="tip" class="el-upload__tip">可上传任意格式文件，且不超过100M</div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button type="text" @click="cancel()">取消</el-button>
+                <el-button type="primary" @click="uploadRadarPhotos">确认</el-button>
+              </div>
+            </el-dialog>
+          </template>
+        </el-table-column>
+        <el-table-column ref="docn" prop="detectionSummary" label="检测报告_上传/下载" >
+          <template slot-scope="scope">
+            <el-button mutilline="true" type="text" @click="updateDetectionSummaryDialog(scope.row)">上传</el-button>
+            <el-button mutilline="true" type="text" @click="downloadDetectionSummary(scope.row,scope.row.detectionSummary)">下载</el-button>
+            {{ scope.row.detectionSummary }}
+            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadDetectionSummaryDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+              <el-form ref="form" :model="form" size="small" label-width="80px">
+                <el-form-item label="上传">
+                  <!--   上传文件   -->
+                  <el-upload
+                    ref="upload"
+                    :limit="1"
+                    :before-upload="beforeUpload"
+                    :auto-upload="false"
+                    :headers="headers"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
+                    :action=updateDetectionSummaryPath
+                    :data="{data:dataid}"
+                  >
+                    <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
+                    <div slot="tip" class="el-upload__tip">可上传任意格式文件，且不超过100M</div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button type="text" @click="cancel()">取消</el-button>
+                <el-button type="primary" @click="upload">确认</el-button>
+              </div>
+            </el-dialog>
+          </template>
+        </el-table-column>
+        <el-table-column prop="others" label="其他附件_上传/下载" >
+          <template slot-scope="scope">
+            <el-button mutilline="true" type="text" @click="uploadOthersDialog(scope.row)">上传</el-button>
+            <el-button mutilline="true" type="text" @click="downloadOthers(scope.row,scope.row.others)">下载</el-button>
+            {{ scope.row.others }}
+            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadOthersDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+              <el-form ref="form" :model="form" size="small" label-width="80px">
+                <el-form-item label="上传">
+                  <!--   上传文件   -->
+                  <el-upload
+                    ref="upload"
+                    :limit="1"
+                    :before-upload="beforeUpload"
+                    :auto-upload="false"
+                    :headers="headers"
+                    :on-success="handleSuccess"
+                    :on-error="handleError"
+                    :action=uploadOthersPath
+                    :data="{data:dataid}"
+                  >
+                    <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
+                    <div slot="tip" class="el-upload__tip">可上传任意格式文件，且不超过100M</div>
+                  </el-upload>
+                </el-form-item>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button type="text" @click="cancel()">取消</el-button>
+                <el-button type="primary" @click="upload">确认</el-button>
+              </div>
+            </el-dialog>
+          </template>
+        </el-table-column>
         <el-table-column prop="beizhu1" label="beizhu1" />
         <el-table-column prop="beizhu2" label="beizhu2" />
         <el-table-column prop="beizhu3" label="beizhu3" />
@@ -178,6 +271,14 @@
         <el-table-column prop="beizhu15" label="beizhu15" />
         <el-table-column v-if="checkPer(['admin','detectionInformation:edit','detectionInformation:del'])" label="操作" width="150px" align="center">
           <template slot-scope="scope">
+            <el-button
+              slot="right"
+              class="filter-item"
+              size="mini"
+              type="info"
+              style="border-color: #FFBA00;color: #FFBA00"
+              @click="downloadData(scope.row)"
+            ><svg-icon icon-class="download" style="color: #FFBA00" />下载数据</el-button>
             <udOperation
               :data="scope.row"
               :permission="permission"
@@ -187,6 +288,7 @@
       </el-table>
       <!--分页组件-->
       <pagination />
+      <!--表单组件-->
     </div>
   </div>
 </template>
@@ -198,8 +300,13 @@ import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
-
+import { downloadFile } from '@/utils/index'
+import { downloadFileRaw } from '@/utils/index'
+import { generator } from '@/api/system/detectionInformation'
+import { edit } from '@/api/system/detectionInformation';
+import { getToken } from '@/utils/auth'
 const defaultForm = { detectionId: null, projectName: null, sectionName: null, tunnelId: null, tunnelName: null, worksiteName: null, detectionStartingDistance: null, detectionEndingDistance: null, detectionLength: null, time: null, testId: null, detectionLineBiaohao: null, detectionData: null, detectionPhotos: null, radarPhotos: null, detectionSummary: null, others: null, beizhu1: null, beizhu2: null, beizhu3: null, beizhu4: null, beizhu5: null, beizhu6: null, beizhu7: null, beizhu8: null, beizhu9: null, beizhu10: null, beizhu11: null, beizhu12: null, beizhu13: null, beizhu14: null, beizhu15: null }
+const baseUrl = process.env.VUE_APP_BASE_API === '/' ? '' : process.env.VUE_APP_BASE_API
 export default {
   name: 'DetectionInformation',
   components: { pagination, crudOperation, rrOperation, udOperation },
@@ -214,6 +321,14 @@ export default {
         edit: ['admin', 'detectionInformation:edit'],
         del: ['admin', 'detectionInformation:del']
       },
+      headers: { 'Authorization': getToken() },
+      updateRadarPhotoPath: baseUrl + '/api/detectionInformation/updateRadarPhoto',
+      updateDetectionSummaryPath: baseUrl + '/api/detectionInformation/updateDetectionSummary',
+      uploadOthersPath: baseUrl + '/api/detectionInformation/uploadOthers',
+      uploadRadarDialogIs: false,
+      uploadDetectionSummaryDialogIs: false,
+      uploadOthersDialogIs: false,
+      dataid: -1,
       rules: {
       },
       queryTypeOptions: [
@@ -232,12 +347,91 @@ export default {
         { key: 'detectionSummary', display_name: '检测报告_上传/下载' },
         { key: 'others', display_name: '其他附件_上传/下载' }
       ]
+      // uploadPhotoPath: baseUrl+'/api/upload/updateFile'
     }
   },
   methods: {
     // 钩子：在获取表格数据之前执行，false 则代表不获取数据
     [CRUD.HOOK.beforeRefresh]() {
       return true
+    },
+    downloadData(data) {
+      // 打包下载
+      generator(data, 2).then(data => {
+        downloadFile(data, data, 'zip')
+      })
+    },
+    downloadRadarPhotos(data,name) {
+      // 打包下载
+      generator(data, -1).then(data => {
+        downloadFileRaw(data, name)
+    })
+    },
+    downloadDetectionSummary(data,name) {
+      // 打包下载
+      generator(data, -2).then(data => {
+        downloadFileRaw(data, name)
+      })
+    },
+    downloadOthers(data,name) {
+      // 打包下载
+      generator(data, -3).then(data => {
+        downloadFileRaw(data, name)
+      })
+    },
+    updateRadarPhotosDialog(data){
+      this.dataid = data.detectionId
+      this.uploadRadarDialogIs = true
+    },
+    updateDetectionSummaryDialog(data){
+      this.dataid = data.detectionId
+      this.uploadDetectionSummaryDialogIs = true
+    },
+    uploadOthersDialog(data){
+      this.dataid = data.detectionId
+      this.uploadOthersDialogIs = true
+    },
+    upload() {
+      this.$refs.upload.submit()
+    },
+    uploadRadarPhotos() {
+      this.$refs.upload.submit()
+    },
+    uploadOthers() {
+      this.$refs.upload.submit()
+    },
+    beforeUpload(file) {
+      let isLt2M = true
+      isLt2M = file.size / 1024 / 1024 < 100
+      if (!isLt2M) {
+        this.loading = false
+        this.$message.error('上传文件大小不能超过 100MB!')
+      }
+      this.form.name = file.name
+      console.log(file.name)
+      return isLt2M
+    },
+    // beforesubmit(response, file, fileList) {
+    //   this.$refs.upload.clearFiles()
+    // },
+    handleSuccess(response, file, data) {
+      // data.detectionPhotos = response.data
+      // edit(data)
+      this.crud.notify('上传成功', CRUD.NOTIFICATION_TYPE.SUCCESS)
+      // this.changeVersion(response, 1)
+      this.$refs.upload.clearFiles()
+    },
+    // 监听上传失败
+    handleError(e, file, fileList) {
+      const msg = JSON.parse(e.message)
+      this.$notify({
+        title: msg.message,
+        type: 'error',
+        duration: 2500
+      })
+    },
+    cancel(){
+      this.uploadPhotoDialog = false
     }
   }
 }

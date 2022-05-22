@@ -23,5 +23,15 @@ export function edit(data) {
     data
   })
 }
+export function generator(data, type) {
+  return request({
+    url: 'api/detectionInformation/' + type,
+    method: 'post',
+    data,
+    responseType: type === 2 ? 'blob' : 'blob'
+  })
+}
+export function updateDetectionPhotos(){
 
+}
 export default { add, edit, del }

@@ -90,4 +90,12 @@ export function listDishesInfoZhuji() {
     method: 'post'
   })
 }
+export function generator(data, type) {
+  return request({
+    url: 'api/testInformation/' + type,
+    method: 'post',
+    data,
+    responseType: type === 2 ? 'blob' : 'blob'
+  })
+}
 export default { add, edit, del, createTest, editForm, delForm, listDishesInfo, listDishesInfo1, createErweima, listDishesInfoTianxian, listDishesInfoZhuji, jilieditForm, jianceeditForm }
