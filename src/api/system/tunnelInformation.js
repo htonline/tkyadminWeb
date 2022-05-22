@@ -65,4 +65,11 @@ export function selectByTunnelName(tunnelName) {
   })
 }
 
-export default { add, edit, del, select, changeStatue, selectByStatue, selectByStatueFenye, selectByTunnelName }
+export function selectParam() {
+  return request({
+    url: 'api/tunnelInformation/selectParam',
+    method: 'post'
+  })
+}
+
+export default { add, edit, del, select, changeStatue, selectByStatue, selectByStatueFenye, selectByTunnelName, selectParam }

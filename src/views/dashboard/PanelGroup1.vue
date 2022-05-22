@@ -101,7 +101,7 @@
           <div class="card-panel-text">
             检测率
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="th8" :duration="3600" class="card-panel-num" />%
         </div>
       </div>
     </el-col>
@@ -110,6 +110,7 @@
 
 <script>
 import CountTo from 'vue-count-to'
+import { selectParam } from '@/api/system/tunnelInformation'
 
 export default {
   data() {
@@ -120,20 +121,25 @@ export default {
       th4: 0,
       th5: 0,
       th6: 0,
-      th7: 0
+      th7: 0,
+      th8: 0
     }
   },
   components: {
     CountTo
   },
   mounted: function() {
-    this.th1 = 12000
-    this.th2 = 7832
-    this.th3 = 8920
-    this.th4 = 3803
-    this.th5 = 6693
-    this.th6 = 2036
-    this.th7 = 12006
+    selectParam().then(response => {
+      this.th1 = response.tunnelNumner
+      this.th2 = response.tunnelLength
+      this.th3 = response.finishlength
+      this.th4 = response.baojiandanLength
+      this.th5 = response.yijianceLength
+      this.th6 = response.yichuliquexian
+      this.th7 = response.weichuliquexian
+      this.th8 = response.jiancelv
+      //this.$confirm(response)
+    })
   },
   methods: {
     handleSetLineChartData(type) {
