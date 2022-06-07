@@ -384,7 +384,9 @@ export default {
     },
     getDZSdata() {
       getData().then(response => {
-        syntkydata(response.data)
+        syntkydata(response.data).then(response => {
+          this.$confirm('同步成功')
+        })
       })
     },
     createErweima(data) {
