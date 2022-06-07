@@ -39,6 +39,13 @@ module.exports = {
         pathRewrite: {
           '^/auth': 'auth'
         }
+      },
+      '/demo': {
+        target: process.env.VUE_APP_DZS_API,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/demo': 'demo'
+        }
       }
     }
   },

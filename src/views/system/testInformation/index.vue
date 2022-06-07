@@ -454,7 +454,7 @@
             >施工单位查看</el-button>
           </template>
         </el-table-column>
-        <el-table-column v-if="checkPer(['admin','testInformation:edit','testInformation:del','admin','testInformation:createErweima'])" label="操作" width="150px" align="center">
+        <el-table-column v-if="checkPer(['testInformation:edit','testInformation:del','testInformation:createErweima'])" label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
               v-permission="['admin','testInformation:createErweima']"
