@@ -77,11 +77,11 @@ export default {
     // GithubCorner,
     PanelGroup,
     LineChart,
-    RadarChart,
-    PieChart2,
-    PieChart3,
-    BarChart1,
-    BarChart2,
+    RadarChart
+    // PieChart2,
+    // PieChart3,
+    // BarChart1,
+    // BarChart2,
   },
   data() {
     return {
