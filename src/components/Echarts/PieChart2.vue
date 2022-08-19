@@ -1,5 +1,5 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" ></div>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
@@ -50,7 +50,7 @@ export default {
 
       this.chart.setOption({
         title: {
-          text: '隧道检测长度',
+          text: '隧道',
           subtext: '已报检长度:12561米',
           left: 'center'
         },

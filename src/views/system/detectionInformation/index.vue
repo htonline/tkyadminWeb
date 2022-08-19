@@ -157,13 +157,13 @@
         <el-table-column prop="testId" label="报检号" />
         <el-table-column prop="detectionLineBiaohao" label="测线编号" />
         <el-table-column prop="detectionData" label="检测数据-上传/下载" />
-        <el-table-column prop="detectionPhotos" label="现场照片-上传/下载"></el-table-column>
-        <el-table-column prop="radarPhotos" label="雷达图谱-上传/下载" >
+        <el-table-column prop="detectionPhotos" label="现场照片-上传/下载" />
+        <el-table-column prop="radarPhotos" label="雷达图谱-上传/下载">
           <template slot-scope="scope">
             <el-button mutilline="true" type="text" @click="updateRadarPhotosDialog(scope.row)">上传</el-button>
             <el-button mutilline="true" type="text" @click="downloadRadarPhotos(scope.row,scope.row.radarPhotos)">下载</el-button>
             {{ scope.row.radarPhotos }}
-            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadRadarDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+            <el-dialog append-to-body :close-on-click-modal="false" :visible.sync="uploadRadarDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
               <el-form ref="form" :model="form" size="small" label-width="80px">
                 <el-form-item label="上传">
                   <!--   上传文件   -->
@@ -175,7 +175,7 @@
                     :headers="headers"
                     :on-success="handleSuccess"
                     :on-error="handleError"
-                    :action=updateRadarPhotoPath
+                    :action="updateRadarPhotoPath"
                     :data="{data:dataid}"
                   >
                     <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
@@ -190,12 +190,12 @@
             </el-dialog>
           </template>
         </el-table-column>
-        <el-table-column ref="docn" prop="detectionSummary" label="检测报告_上传/下载" >
+        <el-table-column ref="docn" prop="detectionSummary" label="检测报告_上传/下载">
           <template slot-scope="scope">
             <el-button mutilline="true" type="text" @click="updateDetectionSummaryDialog(scope.row)">上传</el-button>
             <el-button mutilline="true" type="text" @click="downloadDetectionSummary(scope.row,scope.row.detectionSummary)">下载</el-button>
             {{ scope.row.detectionSummary }}
-            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadDetectionSummaryDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+            <el-dialog append-to-body :close-on-click-modal="false" :visible.sync="uploadDetectionSummaryDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
               <el-form ref="form" :model="form" size="small" label-width="80px">
                 <el-form-item label="上传">
                   <!--   上传文件   -->
@@ -207,7 +207,7 @@
                     :headers="headers"
                     :on-success="handleSuccess"
                     :on-error="handleError"
-                    :action=updateDetectionSummaryPath
+                    :action="updateDetectionSummaryPath"
                     :data="{data:dataid}"
                   >
                     <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
@@ -222,12 +222,12 @@
             </el-dialog>
           </template>
         </el-table-column>
-        <el-table-column prop="others" label="其他附件_上传/下载" >
+        <el-table-column prop="others" label="其他附件_上传/下载">
           <template slot-scope="scope">
             <el-button mutilline="true" type="text" @click="uploadOthersDialog(scope.row)">上传</el-button>
             <el-button mutilline="true" type="text" @click="downloadOthers(scope.row,scope.row.others)">下载</el-button>
             {{ scope.row.others }}
-            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadOthersDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+            <el-dialog append-to-body :close-on-click-modal="false" :visible.sync="uploadOthersDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
               <el-form ref="form" :model="form" size="small" label-width="80px">
                 <el-form-item label="上传">
                   <!--   上传文件   -->
@@ -239,7 +239,7 @@
                     :headers="headers"
                     :on-success="handleSuccess"
                     :on-error="handleError"
-                    :action=uploadOthersPath
+                    :action="uploadOthersPath"
                     :data="{data:dataid}"
                   >
                     <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
@@ -303,7 +303,7 @@ import pagination from '@crud/Pagination'
 import { downloadFile } from '@/utils/index'
 import { downloadFileRaw } from '@/utils/index'
 import { generator } from '@/api/system/detectionInformation'
-import { edit } from '@/api/system/detectionInformation';
+import { edit } from '@/api/system/detectionInformation'
 import { getToken } from '@/utils/auth'
 const defaultForm = { detectionId: null, projectName: null, sectionName: null, tunnelId: null, tunnelName: null, worksiteName: null, detectionStartingDistance: null, detectionEndingDistance: null, detectionLength: null, time: null, testId: null, detectionLineBiaohao: null, detectionData: null, detectionPhotos: null, radarPhotos: null, detectionSummary: null, others: null, beizhu1: null, beizhu2: null, beizhu3: null, beizhu4: null, beizhu5: null, beizhu6: null, beizhu7: null, beizhu8: null, beizhu9: null, beizhu10: null, beizhu11: null, beizhu12: null, beizhu13: null, beizhu14: null, beizhu15: null }
 const baseUrl = process.env.VUE_APP_BASE_API === '/' ? '' : process.env.VUE_APP_BASE_API
@@ -361,33 +361,33 @@ export default {
         downloadFile(data, data, 'zip')
       })
     },
-    downloadRadarPhotos(data,name) {
+    downloadRadarPhotos(data, name) {
       // 打包下载
       generator(data, -1).then(data => {
         downloadFileRaw(data, name)
-    })
+      })
     },
-    downloadDetectionSummary(data,name) {
+    downloadDetectionSummary(data, name) {
       // 打包下载
       generator(data, -2).then(data => {
         downloadFileRaw(data, name)
       })
     },
-    downloadOthers(data,name) {
+    downloadOthers(data, name) {
       // 打包下载
       generator(data, -3).then(data => {
         downloadFileRaw(data, name)
       })
     },
-    updateRadarPhotosDialog(data){
+    updateRadarPhotosDialog(data) {
       this.dataid = data.detectionId
       this.uploadRadarDialogIs = true
     },
-    updateDetectionSummaryDialog(data){
+    updateDetectionSummaryDialog(data) {
       this.dataid = data.detectionId
       this.uploadDetectionSummaryDialogIs = true
     },
-    uploadOthersDialog(data){
+    uploadOthersDialog(data) {
       this.dataid = data.detectionId
       this.uploadOthersDialogIs = true
     },
@@ -423,14 +423,14 @@ export default {
     },
     // 监听上传失败
     handleError(e, file, fileList) {
-      const msg = JSON.parse(e.message)
+      const msg = '上传失败'
       this.$notify({
         title: msg.message,
         type: 'error',
         duration: 2500
       })
     },
-    cancel(){
+    cancel() {
       this.uploadPhotoDialog = false
     }
   }

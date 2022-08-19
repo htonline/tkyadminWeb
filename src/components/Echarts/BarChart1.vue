@@ -52,7 +52,7 @@ export default {
 
       this.chart.setOption({
         title: {
-          text: '已检隧道数量（座）',
+          text: '数量（座）',
           left: 10
         },
         toolbox: {

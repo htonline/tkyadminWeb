@@ -1,5 +1,5 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" ></div>
+  <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
@@ -50,7 +50,7 @@ export default {
 
       this.chart.setOption({
         title: {
-          text: '报检单检测进度',
+          text: '报检单',
           subtext: '已报检单数:101单',
           left: 'center'
         },

@@ -52,7 +52,7 @@ export default {
 
       this.chart.setOption({
         title: {
-          text: '已检隧道长度（米）',
+          text: '长度（米）',
           left: 10
         },
         toolbox: {

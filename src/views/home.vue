@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-editor-container">
-    <!-- <github-corner class="github-corner" /> -->
+      <!-- <github-corner class="github-corner" /> -->
       <div class="card-panel-text">
         <span>衬砌检测总体概况</span>
         <panel-group @handleSetLineChartData="handleSetLineChartData" />
@@ -36,7 +36,7 @@
         </el-col>
       </el-row>
       <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-       <!-- <line-chart :chart-data="lineChartData" />  -->
+        <!-- <line-chart :chart-data="lineChartData" />  -->
         <line-chart />
       </el-row>
     </div>
@@ -77,11 +77,11 @@ export default {
     // GithubCorner,
     PanelGroup,
     LineChart,
-    RadarChart
-    // PieChart2,
-    // PieChart3,
-    // BarChart1,
-    // BarChart2,
+    RadarChart,
+    PieChart2,
+    PieChart3,
+    BarChart1,
+    BarChart2
   },
   data() {
     return {
