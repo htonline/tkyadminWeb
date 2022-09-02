@@ -24,21 +24,21 @@ export function edit(data) {
   })
 }
 
-export function getData() {
-  return request({
-    url: 'demo/sd_projectinspectiondeclaration/getWaitSubmitList',
-    method: 'get',
-    headers: {
-      'CRBIMUID': '369364'
-    }
-  })
-}
+// export function getData() {
+//   return request({
+//     url: 'demo/sd_projectinspectiondeclaration/getWaitSubmitList',
+//     method: 'get',
+//     headers: {
+//       'CRBIMUID': '369364'
+//     }
+//   })
+// }
 
-export function syntkydata(data) {
+export function syntkydata() {
   return request({
     url: 'api/tkyTestInformation/syntkydata',
-    method: 'post',
-    data
+    method: 'post'
+    // data
   })
 }
 export function createErweima(data) {
