@@ -138,7 +138,6 @@ export default {
     return {
       radarPictureDialog: false,
       uploadFileDialog: false,
-      chunkSize: 5 * 1024 * 1024, // 每个分片的大小，这里设置为5MB
       headers: {
         'Authorization': getToken()
       },
@@ -197,29 +196,8 @@ export default {
     upload() {
       this.$refs.upload.submit()
     },
-    async beforeUpload(file) {
-      // 将文件切分成分片
-      const chunks = []
-      let start = 0
-      while (start < file.size) {
-        const end = Math.min(start + this.chunkSize, file.size)
-        const chunk = file.slice(start, end)
-        chunks.push(chunk)
-        start = end
-      }
-
-      // 上传分片
-      const promises = chunks.map((chunk, index) => {
-        const formData = new FormData()
-        formData.append('file', chunk)
-        formData.append('index', index)
-        formData.append('totalChunks', chunks.length)
-        return this.uploadChunk(formData)
-      })
-
-      // 等待所有分片上传完成
-      await Promise.all(promises)
-    },
+    // beforeUpload(file) {
+    // },
     beforesubmit(response, file, fileList) {
       this.$refs.upload.clearFiles()
     },
