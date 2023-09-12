@@ -23,6 +23,7 @@
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--表单组件-->
+      <!--      编辑dialog-->
       <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
           <!--
@@ -30,14 +31,14 @@
             <el-input v-model="form.deviceId" style="width: 370px;" />
           </el-form-item>
           -->
-          <el-form-item  label="设备类型" >
-            <el-select v-model="form.deviceType" clearable placeholder="请选择" style="width: 150px;" >
+          <el-form-item label="设备类型">
+            <el-select v-model="form.deviceType" clearable placeholder="请选择" style="width: 150px;">
               <el-option
                 v-for="item in options1"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
-              </el-option>
+                :value="item.value"
+              />
             </el-select>
           </el-form-item>
           <el-form-item label="设备型号">
@@ -46,13 +47,13 @@
           <el-form-item label="设备编号">
             <el-input v-model="form.deviceBianhao" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="设备照片" >
+          <el-form-item label="设备照片">
             <el-button style="margin-left: 10px;" size="small" type="primary" @click="submit">上传照片</el-button>
-            <el-input  ref="inp"  v-model="form.devicePhotos" style="width: 120px;" @input="changeVersion" type="hidden"></el-input>
+            <el-input ref="inp" v-model="form.devicePhotos" style="width: 120px;" type="hidden" @input="changeVersion" />
           </el-form-item>
-          <el-form-item label="设备证书" >
+          <el-form-item label="设备证书">
             <el-button style="margin-left: 10px;" size="small" type="success" @click="submit1">上传证书</el-button>
-            <el-input  ref="inpu"  v-model="form.deviceCertificate" style="width: 120px;" @input="changeVersion" type="hidden"></el-input>
+            <el-input ref="inpu" v-model="form.deviceCertificate" style="width: 120px;" type="hidden" @input="changeVersion" />
           </el-form-item>
 
           <!--
@@ -115,7 +116,7 @@
         <el-table-column prop="deviceType" label="设备类型" />
         <el-table-column prop="deviceModel" label="设备型号" />
         <el-table-column prop="deviceBianhao" label="设备编号" />
-        <el-table-column  label="设备照片" width="150px" align="center">
+        <el-table-column label="设备照片" width="150px" align="center">
           <template slot-scope="scopes">
             <el-button
               class="filter-item"
@@ -127,7 +128,7 @@
             >查看</el-button>
           </template>
         </el-table-column>
-        <el-table-column  label="设备证书" width="150px" align="center">
+        <el-table-column label="设备证书" width="150px" align="center">
           <template slot-scope="scopes">
             <el-button
               class="filter-item"
@@ -167,11 +168,12 @@
       </el-table>
       <!--分页组件-->
       <pagination />
+      <!--      上传文件Dialog-->
       <el-dialog title="附件材料" :visible.sync="TunnelDialog">
         <el-upload
+          ref="upload"
           multiple
           class="upload-demo"
-          ref="upload"
           :action="fileUploadApi + '?name=' + form.name"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
@@ -190,9 +192,9 @@
       </el-dialog>
       <el-dialog title="附件材料" :visible.sync="TunnelDialog1">
         <el-upload
+          ref="upload"
           multiple
           class="upload-demo"
-          ref="upload"
           :action="fileUploadApi + '?name=' + form.name"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
@@ -210,7 +212,7 @@
         </el-upload>
       </el-dialog>
       <el-dialog title="附件材料" :visible.sync="TunnelDialog3">
-        <el-table ref="table" v-loading="crud.loading" :data=DataList style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+        <el-table ref="table" v-loading="crud.loading" :data="DataList" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
           <el-table-column prop="name" label="文件名">
             <template slot-scope="scope">
               <el-popover
@@ -227,7 +229,7 @@
                   style="word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color: #1890ff;font-size: 13px;"
                   target="_blank"
                 >
-                  {{ scope.row.realName}}
+                  {{ scope.row.realName }}
                 </a>
               </el-popover>
             </template>
@@ -338,6 +340,7 @@ export default {
     look(data) {
       selectPhotos(data).then(response => {
         this.DataList = response
+        console.log('this.DataList', this.DataList)
       })
       this.TunnelDialog3 = true
     },
@@ -361,10 +364,10 @@ export default {
       console.log(file, fileList)
     },
     handlePreview(file) {
-      console.log(file)
+      console.log('file:', file)
     },
     handleAvatarSuccess(file) {
-      console.log(file)
+      console.log('file:', file)
     },
     // 上传文件
     upload() {

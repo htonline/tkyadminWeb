@@ -1,5 +1,6 @@
+<!--首页板块-->
 <template>
-  <el-row :gutter="40" class="panel-group" >
+  <el-row :gutter="40" class="panel-group">
 
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
@@ -8,7 +9,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            隧道总数量（座）
+            隧道信息（座）
           </div>
           <count-to :start-val="0" :end-val="th1" :duration="2000" class="card-panel-num" />
         </div>
@@ -27,19 +28,19 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="work" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            已施工进度（米）
-          </div>
-          <count-to :start-val="0" :end-val="th3" :duration="2600" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
+    <!--    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">-->
+    <!--      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">-->
+    <!--        <div class="card-panel-icon-wrapper icon-people">-->
+    <!--          <svg-icon icon-class="work" class-name="card-panel-icon" />-->
+    <!--        </div>-->
+    <!--        <div class="card-panel-description">-->
+    <!--          <div class="card-panel-text">-->
+    <!--            已施工进度（米）-->
+    <!--          </div>-->
+    <!--          <count-to :start-val="0" :end-val="th3" :duration="2600" class="card-panel-num" />-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </el-col>-->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-message">
@@ -86,7 +87,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            未处置缺陷（个）
+            缺陷数量（个）
           </div>
           <count-to :start-val="0" :end-val="th7" :duration="3200" class="card-panel-num" />
         </div>
@@ -99,7 +100,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            检测率
+            检测进度
           </div>
           <count-to :start-val="0" :end-val="th8" :duration="3600" class="card-panel-num" />%
         </div>
@@ -113,6 +114,9 @@ import CountTo from 'vue-count-to'
 import { selectParam } from '@/api/system/tunnelInformation'
 
 export default {
+  components: {
+    CountTo
+  },
   data() {
     return {
       th1: 0,
@@ -125,11 +129,9 @@ export default {
       th8: 0
     }
   },
-  components: {
-    CountTo
-  },
   mounted: function() {
     selectParam().then(response => {
+      console.log('response', response)
       this.th1 = response.tunnelNumner
       this.th2 = response.tunnelLength
       this.th3 = response.finishlength
@@ -138,7 +140,7 @@ export default {
       this.th6 = response.yichuliquexian
       this.th7 = response.weichuliquexian
       this.th8 = response.jiancelv
-      //this.$confirm(response)
+      // this.$confirm(response)
     })
   },
   methods: {

@@ -78,7 +78,7 @@ function CRUD(options) {
       },
       // 标题
       get title() {
-        return this.add > CRUD.STATUS.NORMAL ? `新增${crud.title}` : this.edit > CRUD.STATUS.NORMAL ? `编辑${crud.title}` : crud.title
+        return this.add > CRUD.STATUS.NORMAL ? `新增` : this.edit > CRUD.STATUS.NORMAL ? `编辑` : crud.title
       }
     },
     msg: {
@@ -325,12 +325,25 @@ function CRUD(options) {
       })
     },
     /**
-     * 通用导出
+     * 通用导出(Excel)
      */
     doExport() {
       crud.downloadLoading = true
       download(crud.url + '/download', crud.getQueryParams()).then(result => {
         downloadFile(result, crud.title + '数据', 'xlsx')
+        crud.downloadLoading = false
+      }).catch(() => {
+        crud.downloadLoading = false
+      })
+    },
+    /**
+     * 模板导出(Word)
+     */
+    templateExport() {
+      crud.downloadLoading = true
+      download(crud.url + '/templatedownload', crud.getQueryParams()).then(result => {
+        console.log('result', result)
+        downloadFile(result, crud.title + '模板', 'docx')
         crud.downloadLoading = false
       }).catch(() => {
         crud.downloadLoading = false

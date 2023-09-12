@@ -1,3 +1,4 @@
+<!--  隧道衬砌信息管理 -> 数据信息管理 -->
 <template>
   <div class="app-container">
     <!--工具栏-->
@@ -10,14 +11,14 @@
         <el-input v-model="query.account" clearable placeholder="用户账号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">试验类型</label>
         <el-input v-model="query.testType" clearable placeholder="试验类型" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">实际检测开始里程</label>
-        <el-input v-model="query.sjstartMile" clearable placeholder="实际检测开始里程" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">实际检测结束里程</label>
-        <el-input v-model="query.sjstopMile" clearable placeholder="实际检测结束里程" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">实际检测开始里程</label>-->
+        <!--        <el-input v-model="query.sjstartMile" clearable placeholder="实际检测开始里程" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">实际检测结束里程</label>-->
+        <!--        <el-input v-model="query.sjstopMile" clearable placeholder="实际检测结束里程" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">厚度数据</label>
         <el-input v-model="query.appFileTypeRadar" clearable placeholder="厚度数据" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">现场照片</label>
-        <el-input v-model="query.appFileTypePhoto" clearable placeholder="现场照片" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">现场照片</label>-->
+        <!--        <el-input v-model="query.appFileTypePhoto" clearable placeholder="现场照片" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">测线编号</label>
         <el-input v-model="query.beizhu1" clearable placeholder="测线编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">检测数据id</label>
@@ -83,7 +84,7 @@
               type="primary"
               style="border-color: #FFBA00;color: #FFBA00"
               @click="uploadDZSData(scope.row)"
-            >上传至电子所</el-button>
+            >上传</el-button>
             <el-button
               slot="left"
               class="filter-item"
@@ -115,6 +116,7 @@ import pagination from '@crud/Pagination'
 import { downloadFile } from '@/utils/index'
 
 const defaultForm = { bydbh: null, account: null, testType: null, sjstartMile: null, sjstopMile: null, appFileTypeRadar: null, appFileTypePhoto: null, beizhu1: null, beizhu2: null, beizhu3: null, beizhu4: null, beizhu5: null, id: null }
+
 export default {
   name: 'TkyDetectionInformation',
   components: { pagination, crudOperation, rrOperation, udOperation },
