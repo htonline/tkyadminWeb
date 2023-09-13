@@ -22,12 +22,12 @@ const api = {
     fileUploadApi: baseUrl + '/api/localStorage',
     // radarPicture图片上传
     pictureUploadApi: baseUrl + '/api/radarPicture/uploadPicture',
-    // baseUrl: http://localhost:8014/
+    // baseUrl: http://localhost:8001/
     baseApi: baseUrl,
     // 预览图请求地址,查找图片的时候：本地调试用这个，找的是自己计算机上的路径，部署到服务器上时，要改成服务器ip
-    pictureBaseApi: 'http://120.46.140.233:8001',
-    // pictureBaseApi: 'http://localhost:8001',
-
+    // pictureBaseApi: 'http://120.46.140.233:8001',
+    pictureBaseApi: 'http://localhost:8001',
+    // =========================除了部署时修改，以上不准再动（......）======================
     // 雷达采集文件上传
     radarFileUploadApi: baseUrl + '/api/radarAcquisitionUpload/uploadFile'
   }

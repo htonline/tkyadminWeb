@@ -31,6 +31,9 @@ import './assets/icons' // icon
 import './router/index' // permission control
 import 'echarts-gl'
 
+import uploader from 'vue-simple-uploader'
+Vue.use(uploader)
+
 Vue.use(checkPer)
 Vue.use(VueHighlightJS)
 Vue.use(mavonEditor)
