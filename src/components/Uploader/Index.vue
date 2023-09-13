@@ -37,6 +37,8 @@ export default {
     return {
       skip: false,
       options: {
+        // localhost 本地测试用这个
+        // 120.46.140.233 部署服务器上时，改成这个
         target: '//localhost:8001/api/big_radar_acquisition_upload/chunk',
         // 开启服务端分片校验功能
         testChunks: true,
@@ -94,7 +96,9 @@ export default {
       if (result.success && !this.skip) {
         axios
           .post(
-            'http://127.0.0.1:8001/api/big_radar_acquisition_upload/merge',
+            // localhost 本地测试用这个
+            // 120.46.140.233 部署服务器上时，改成这个
+            'http://localhost:8001/api/big_radar_acquisition_upload/merge',
             {
               identifier: file.uniqueIdentifier,
               filename: file.name,
@@ -145,7 +149,7 @@ export default {
         File.prototype.mozSlice ||
         File.prototype.webkitSlice
       let currentChunk = 0
-      const chunkSize = 1024 * 1024
+      const chunkSize = 50 * 1024 * 1024
       const chunks = Math.ceil(file.size / chunkSize)
       const spark = new SparkMD5.ArrayBuffer()
       // 文件状态设为"计算MD5"
