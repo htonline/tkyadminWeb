@@ -14,8 +14,8 @@
       <uploader-drop>
         <p>将文件拖放到此处以上传</p>
         <uploader-btn>选择文件</uploader-btn>
-        <uploader-btn :attrs="attrs">选择图片</uploader-btn>
-        <uploader-btn :directory="true">选择文件夹</uploader-btn>
+<!--        <uploader-btn :attrs="attrs">选择图片</uploader-btn>-->
+<!--        <uploader-btn :directory="true">选择文件夹</uploader-btn>-->
       </uploader-drop>
       <!-- <uploader-list></uploader-list> -->
       <uploader-files> </uploader-files>
