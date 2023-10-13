@@ -12,7 +12,7 @@
     >
       <uploader-unsupport></uploader-unsupport>
       <uploader-drop>
-        <p>将文件拖放到此处以上传</p>
+        <p>将文件拖放到此处以上传(<span style="color: red;">文件上传完成之前, 请不要离开本页面！！！</span>)</p>
         <uploader-btn>选择文件</uploader-btn>
 <!--        <uploader-btn :attrs="attrs">选择图片</uploader-btn>-->
 <!--        <uploader-btn :directory="true">选择文件夹</uploader-btn>-->
