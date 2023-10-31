@@ -38,17 +38,6 @@
         <!--        <el-input v-model="query.category15" clearable placeholder="Category15" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <rrOperation :crud="crud" />
       </div>
-      <!--      导出模板-->
-      <el-button
-        v-if="crud.optShow.download"
-        :loading="crud.downloadLoading"
-        :disabled="!crud.data.length"
-        class="filter-item"
-        size="mini"
-        type="info"
-        icon="el-icon-document"
-        @click="crud.templateExport"
-      >病害卡片导出</el-button>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--表单组件-->

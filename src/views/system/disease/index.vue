@@ -24,10 +24,10 @@
         <el-input v-model="query.endWidth" clearable placeholder="宽度结束通道数" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">尺寸</label>
         <el-input v-model="query.diseaseSize" clearable placeholder="尺寸" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">中心点经纬度坐标</label>
-        <el-input v-model="query.longLat" clearable placeholder="中心点经纬度坐标" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">删除标志</label>
-        <el-input v-model="query.delFlag" clearable placeholder="删除标志" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+<!--        <label class="el-form-item-label">中心点经纬度坐标</label>-->
+<!--        <el-input v-model="query.longLat" clearable placeholder="中心点经纬度坐标" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+<!--        <label class="el-form-item-label">删除标志</label>-->
+<!--        <el-input v-model="query.delFlag" clearable placeholder="删除标志" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">创建者</label>
         <el-input v-model="query.createBy" clearable placeholder="创建者" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">更新者</label>
@@ -154,6 +154,20 @@
         <el-table-column prop="remark5" label="备注" />
         <el-table-column prop="remark6" label="备注" />
         <el-table-column prop="updateTime" label="更新时间" />
+        <el-table-column label="病害卡片导出">
+          <template slot-scope="scopes">
+            <el-button
+              v-if="crud.optShow.download"
+              :loading="crud.downloadLoading"
+              :disabled="!crud.data.length"
+              class="filter-item"
+              size="mini"
+              type="info"
+              icon="el-icon-document"
+              @click="crud.templateExport(scopes.row)"
+            >导出</el-button>
+          </template>
+        </el-table-column>
         <el-table-column v-if="checkPer(['admin','disease:edit','disease:del'])" label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <udOperation
@@ -176,6 +190,8 @@ import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
+import {download} from "@/api/data";
+import {downloadFile} from "@/utils";
 
 const defaultForm = { diseaseId: null, radarName: null, soilProperty: null, diseaseType: null, startDepth: null, endDepth: null, freeHeight: null, startWidth: null, endWidth: null, diseaseSize: null, longLat: null, delFlag: null, createBy: null, createTime: null, updateBy: null, remark: null, remark1: null, remark2: null, remark3: null, remark4: null, remark5: null, remark6: null, updateTime: null }
 export default {
@@ -226,7 +242,17 @@ export default {
     // 钩子：在获取表格数据之前执行，false 则代表不获取数据
     [CRUD.HOOK.beforeRefresh]() {
       return true
-    }
+    },
+    // wordTemplateExport(rowData) {
+    //   console.log('data', rowData)
+    //   download(crud.url + '/templatedownload', rowData).then(result => {
+    //     console.log('result', result)
+    //     downloadFile(result, crud.title + '模板', 'docx')
+    //     crud.downloadLoading = false
+    //   }).catch(() => {
+    //     crud.downloadLoading = false
+    //   })
+    // }
   }
 }
 </script>

@@ -339,9 +339,9 @@ function CRUD(options) {
     /**
      * 模板导出(Word)
      */
-    templateExport() {
+    templateExport(rowData) {
       crud.downloadLoading = true
-      download(crud.url + '/templatedownload', crud.getQueryParams()).then(result => {
+      download(crud.url + '/templatedownload', rowData).then(result => {
         console.log('result', result)
         downloadFile(result, crud.title + '模板', 'docx')
         crud.downloadLoading = false
