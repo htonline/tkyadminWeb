@@ -32,8 +32,8 @@
         <el-input v-model="query.createBy" clearable placeholder="创建者" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">更新者</label>
         <el-input v-model="query.updateBy" clearable placeholder="更新者" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <!--        <label class="el-form-item-label">备注</label>-->
-        <!--        <el-input v-model="query.remark" clearable placeholder="备注" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+                <label class="el-form-item-label">道路名称</label>
+                <el-input v-model="query.remark" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <!--        <label class="el-form-item-label">备注</label>-->
         <!--        <el-input v-model="query.remark1" clearable placeholder="备注" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <!--        <label class="el-form-item-label">备注</label>-->
@@ -98,7 +98,7 @@
           <el-form-item label="更新者">
             <el-input v-model="form.updateBy" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="备注">
+          <el-form-item label="道路名称">
             <el-input v-model="form.remark" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="备注">
@@ -146,7 +146,7 @@
         <el-table-column prop="createBy" label="创建者" />
         <el-table-column prop="createTime" label="创建时间" />
         <el-table-column prop="updateBy" label="更新者" />
-        <el-table-column prop="remark" label="备注" />
+        <el-table-column prop="remark" label="道路名称" />
         <el-table-column prop="remark1" label="备注" />
         <el-table-column prop="remark2" label="备注" />
         <el-table-column prop="remark3" label="备注" />
@@ -190,8 +190,6 @@ import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
-import {download} from "@/api/data";
-import {downloadFile} from "@/utils";
 
 const defaultForm = { diseaseId: null, radarName: null, soilProperty: null, diseaseType: null, startDepth: null, endDepth: null, freeHeight: null, startWidth: null, endWidth: null, diseaseSize: null, longLat: null, delFlag: null, createBy: null, createTime: null, updateBy: null, remark: null, remark1: null, remark2: null, remark3: null, remark4: null, remark5: null, remark6: null, updateTime: null }
 export default {
@@ -228,7 +226,7 @@ export default {
         { key: 'delFlag', display_name: '删除标志' },
         { key: 'createBy', display_name: '创建者' },
         { key: 'updateBy', display_name: '更新者' },
-        { key: 'remark', display_name: '备注' },
+        { key: 'remark', display_name: '道路名称' },
         { key: 'remark1', display_name: '备注' },
         { key: 'remark2', display_name: '备注' },
         { key: 'remark3', display_name: '备注' },
@@ -242,17 +240,7 @@ export default {
     // 钩子：在获取表格数据之前执行，false 则代表不获取数据
     [CRUD.HOOK.beforeRefresh]() {
       return true
-    },
-    // wordTemplateExport(rowData) {
-    //   console.log('data', rowData)
-    //   download(crud.url + '/templatedownload', rowData).then(result => {
-    //     console.log('result', result)
-    //     downloadFile(result, crud.title + '模板', 'docx')
-    //     crud.downloadLoading = false
-    //   }).catch(() => {
-    //     crud.downloadLoading = false
-    //   })
-    // }
+    }
   }
 }
 </script>
