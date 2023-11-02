@@ -44,7 +44,7 @@
           <el-form-item label="文件对应的隧道id">
             <el-input v-model="form.tunnelId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="设备照片">
+          <el-form-item label="现场照片">
             <el-button style="margin-left: 10px;" size="small" type="primary" @click="submit">上传照片</el-button>
             <el-input ref="inp" v-model="form.devicePhotos" style="width: 120px;" type="hidden" @input="changeVersion" />
           </el-form-item>

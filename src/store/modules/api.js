@@ -24,6 +24,8 @@ const api = {
     pictureUploadApi: baseUrl + '/api/radarPicture/uploadPicture',
     // 现场图片的上传路径
     scenePictureUploadApi: baseUrl + '/api/picture/uploadScenePicture',
+    // 雷达图谱的上传路径
+    radarSpectrumUploadApi: baseUrl + '/api/pictureRadarSpectrum/uploadSpectrumPicture',
     // baseUrl: http://localhost:8001/
     baseApi: baseUrl,
     // 预览图请求地址,查找图片的时候：本地调试用这个，找的是自己计算机上的路径，部署到服务器上时，要改成服务器ip
