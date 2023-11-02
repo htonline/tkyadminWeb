@@ -49,6 +49,9 @@
             <el-input ref="inp" v-model="form.devicePhotos" style="width: 120px;" type="hidden" @input="changeVersion" />
           </el-form-item>
           <el-form-item label="备注">
+            <el-input v-model="form.remark" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="备注">
             <el-input v-model="form.remark1" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="备注">
@@ -72,9 +75,6 @@
           <el-form-item label="备注">
             <el-input v-model="form.remark8" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="备注">
-            <el-input v-model="form.remark" style="width: 370px;" />
-          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button type="text" @click="crud.cancelCU">取消</el-button>
@@ -87,6 +87,7 @@
         <el-table-column prop="spectrumId" label="雷达图谱id" />
         <el-table-column prop="fileUrl" label="文件存储路径" />
         <el-table-column prop="tunnelId" label="外键，关联tunel表" />
+        <el-table-column prop="remark" label="备注" />
         <el-table-column prop="remark1" label="备注" />
         <el-table-column prop="remark2" label="备注" />
         <el-table-column prop="remark3" label="备注" />
@@ -95,7 +96,6 @@
         <el-table-column prop="remark6" label="备注" />
         <el-table-column prop="remark7" label="备注" />
         <el-table-column prop="remark8" label="备注" />
-        <el-table-column prop="remark" label="备注" />
         <el-table-column v-if="checkPer(['admin','pictureRadarSpectrum:edit','pictureRadarSpectrum:del'])" label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <udOperation
