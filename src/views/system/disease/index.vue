@@ -32,8 +32,8 @@
         <el-input v-model="query.createBy" clearable placeholder="创建者" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">更新者</label>
         <el-input v-model="query.updateBy" clearable placeholder="更新者" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-                <label class="el-form-item-label">道路名称</label>
-                <el-input v-model="query.remark" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路名称</label>
+        <el-input v-model="query.remark" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <!--        <label class="el-form-item-label">备注</label>-->
         <!--        <el-input v-model="query.remark1" clearable placeholder="备注" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <!--        <label class="el-form-item-label">备注</label>-->
@@ -92,16 +92,13 @@
           <el-form-item label="创建者">
             <el-input v-model="form.createBy" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="创建时间">
-            <el-input v-model="form.createTime" style="width: 370px;" />
-          </el-form-item>
           <el-form-item label="更新者">
             <el-input v-model="form.updateBy" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="道路名称">
             <el-input v-model="form.remark" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="备注">
+          <el-form-item label="对应的病害信息表ID">
             <el-input v-model="form.remark1" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="备注">
@@ -118,9 +115,6 @@
           </el-form-item>
           <el-form-item label="备注">
             <el-input v-model="form.remark6" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="更新时间">
-            <el-input v-model="form.updateTime" style="width: 370px;" />
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -146,14 +140,14 @@
         <el-table-column prop="createBy" label="创建者" />
         <el-table-column prop="createTime" label="创建时间" />
         <el-table-column prop="updateBy" label="更新者" />
+        <el-table-column prop="updateTime" label="更新时间" />
         <el-table-column prop="remark" label="道路名称" />
-        <el-table-column prop="remark1" label="备注" />
+        <el-table-column prop="remark1" label="对应的病害信息表ID" />
         <el-table-column prop="remark2" label="备注" />
         <el-table-column prop="remark3" label="备注" />
         <el-table-column prop="remark4" label="备注" />
         <el-table-column prop="remark5" label="备注" />
         <el-table-column prop="remark6" label="备注" />
-        <el-table-column prop="updateTime" label="更新时间" />
         <el-table-column label="病害卡片导出">
           <template slot-scope="scopes">
             <el-button
@@ -227,7 +221,7 @@ export default {
         { key: 'createBy', display_name: '创建者' },
         { key: 'updateBy', display_name: '更新者' },
         { key: 'remark', display_name: '道路名称' },
-        { key: 'remark1', display_name: '备注' },
+        { key: 'remark1', display_name: '对应的病害信息表ID' },
         { key: 'remark2', display_name: '备注' },
         { key: 'remark3', display_name: '备注' },
         { key: 'remark4', display_name: '备注' },
