@@ -1,5 +1,5 @@
 <template>
-  <!--  隧道衬砌信息管理 - 报检管理 -->
+  <!--  道路衬砌信息管理 - 报检管理 -->
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">
@@ -44,8 +44,8 @@
          <el-input v-model="query.projectName" clearable placeholder="项目名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
          <label class="el-form-item-label">标段名称</label>
          <el-input v-model="query.sectionName" clearable placeholder="标段名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-         <label class="el-form-item-label">隧道名称</label>
-         <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+         <label class="el-form-item-label">道路名称</label>
+         <el-input v-model="query.tunnelName" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
          <label class="el-form-item-label">工点名称</label>
          <el-input v-model="query.worksiteName" clearable placeholder="工点名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
          <label class="el-form-item-label">状态</label>
@@ -73,7 +73,7 @@
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
           <el-row>
             <div>
-              <el-divider>隧道基本信息</el-divider>
+              <el-divider>道路基本信息</el-divider>
             </div>
           </el-row>
           <el-row>
@@ -91,7 +91,7 @@
             </el-col>
             <el-col :span="7">
               <el-form-item>
-                <div class="sub-title">隧道名称</div>
+                <div class="sub-title">道路名称</div>
                 <el-input v-model="form.tunnelName" style="width: 250px;" />
               </el-form-item>
             </el-col>
@@ -308,7 +308,7 @@
             </el-col>
             <el-col :span="6">
               <el-form-item label="">
-                <div class="sub-title">隧道浇筑时间</div>
+                <div class="sub-title">道路浇筑时间</div>
                 <el-date-picker
                   v-model="form.beizhu13"
                   type="datetime"
@@ -384,7 +384,7 @@
         </el-table-column>
         <el-table-column prop="projectName" label="项目名称" />
         <el-table-column prop="sectionName" label="标段名称" />
-        <el-table-column prop="tunnelName" label="隧道名称" />
+        <el-table-column prop="tunnelName" label="道路名称" />
         <el-table-column prop="worksiteName" label="工点名称" />
         <el-table-column prop="testId" label="报检号" />
         <el-table-column prop="testTime" label="申请检测时间" />
@@ -473,26 +473,26 @@
       <el-dialog :visible.sync="errordialog" title="二维码" append-to-body top="30px" width="30%">
         <img :src="errorInfo" style="width:500px;height:600px">
       </el-dialog>
-      <el-dialog title="隧道信息" :visible.sync="TunnelDialog" width="60%">
+      <el-dialog title="道路信息" :visible.sync="TunnelDialog" width="60%">
         <div v-if="crud.props.searchToggle">
           <label class="el-form-item-label">项目名称</label>
           <el-input v-model="query.projectName" clearable placeholder="项目名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
           <label class="el-form-item-label">标段名称</label>
-          <el-input v-model="query.tunnelId" clearable placeholder="隧道编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-          <label class="el-form-item-label">隧道名称</label>
-          <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+          <el-input v-model="query.tunnelId" clearable placeholder="道路编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+          <label class="el-form-item-label">道路名称</label>
+          <el-input v-model="query.tunnelName" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
           <rrOperation :crud="crud" />
         </div>
         <el-table ref="table" v-loading="crud.loading" :data="DataList" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
           <el-table-column prop="tunnelInforId" label="序号" />
           <el-table-column prop="projectName" label="项目名称" />
           <el-table-column prop="sectionName" label="标段名称" />
-          <el-table-column prop="tunnelId" label="隧道编号" />
-          <el-table-column prop="tunnelName" label="隧道名称" />
+          <el-table-column prop="tunnelId" label="道路编号" />
+          <el-table-column prop="tunnelName" label="道路名称" />
           <el-table-column prop="worksiteName" label="工点名称" />
-          <el-table-column prop="tunnelStartingDistance" label="隧道起始里程" />
-          <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
-          <el-table-column prop="tunnelLength" label="隧道长度" />
+          <el-table-column prop="tunnelStartingDistance" label="道路起始里程" />
+          <el-table-column prop="tunnelEndingDistance" label="道路结束里程" />
+          <el-table-column prop="tunnelLength" label="道路长度" />
           <el-table-column label="状态" width="170px" align="center" prop="beizhu4" />
           <el-table-column label="附件材料" width="150px" align="center">
             <template slot-scope="scopes">
@@ -514,11 +514,11 @@
       <!--分页组件-->
       <pagination />
     </div>
-    <el-dialog :visible.sync="openTuneldialog" :close-on-click-modal="false" title="隧道信息" append-to-body width="1300px" @closed="cancelOpenTuneldialog">
+    <el-dialog :visible.sync="openTuneldialog" :close-on-click-modal="false" title="道路信息" append-to-body width="1300px" @closed="cancelOpenTuneldialog">
       <div class="head-container">
         <div>
-          <label class="el-form-item-label">隧道名称</label>
-          <el-input ref="tunnelName" v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" />
+          <label class="el-form-item-label">道路名称</label>
+          <el-input ref="tunnelName" v-model="query.tunnelName" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" />
           <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="serach()">搜索</el-button>
         </div>
         <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
@@ -527,12 +527,12 @@
       <el-table ref="table" v-loading="crud.loading" :data="Data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column prop="projectName" label="项目名称" />
         <el-table-column prop="sectionName" label="标段名称" />
-        <el-table-column prop="tunnelId" label="隧道编号" />
-        <el-table-column prop="tunnelName" label="隧道名称" />
+        <el-table-column prop="tunnelId" label="道路编号" />
+        <el-table-column prop="tunnelName" label="道路名称" />
         <el-table-column prop="worksiteName" label="工点名称" />
-        <el-table-column prop="tunnelStartingDistance" label="隧道起始里程" />
-        <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
-        <el-table-column prop="tunnelLength" label="隧道长度" />
+        <el-table-column prop="tunnelStartingDistance" label="道路起始里程" />
+        <el-table-column prop="tunnelEndingDistance" label="道路结束里程" />
+        <el-table-column prop="tunnelLength" label="道路长度" />
         <el-table-column label="附件材料" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
@@ -609,7 +609,7 @@
       <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
         <el-row>
           <div>
-            <el-divider>隧道基本信息</el-divider>
+            <el-divider>道路基本信息</el-divider>
           </div>
         </el-row>
         <el-row>
@@ -627,7 +627,7 @@
           </el-col>
           <el-col :span="7">
             <el-form-item>
-              <div class="sub-title">隧道名称</div>
+              <div class="sub-title">道路名称</div>
               <el-input v-model="defaultForms.tunnelName" style="width: 250px;" />
             </el-form-item>
           </el-col>
@@ -844,7 +844,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="">
-              <div class="sub-title">隧道浇筑时间</div>
+              <div class="sub-title">道路浇筑时间</div>
               <el-date-picker
                 v-model="defaultForms.beizhu13"
                 type="datetime"
@@ -882,7 +882,7 @@
       <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
         <el-row>
           <div>
-            <el-divider>隧道基本信息</el-divider>
+            <el-divider>道路基本信息</el-divider>
           </div>
         </el-row>
         <el-row>
@@ -900,7 +900,7 @@
           </el-col>
           <el-col :span="7">
             <el-form-item>
-              <div class="sub-title">隧道名称</div>
+              <div class="sub-title">道路名称</div>
               <el-input v-model="defaultForms.tunnelName" style="width: 250px;" />
             </el-form-item>
           </el-col>
@@ -1046,7 +1046,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="">
-              <div class="sub-title">隧道浇筑时间</div>
+              <div class="sub-title">道路浇筑时间</div>
               <el-date-picker
                 v-model="defaultForms.beizhu13"
                 type="datetime"
@@ -1118,7 +1118,7 @@
       <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
         <el-row>
           <div>
-            <el-divider>隧道基本信息</el-divider>
+            <el-divider>道路基本信息</el-divider>
           </div>
         </el-row>
         <el-row>
@@ -1136,7 +1136,7 @@
           </el-col>
           <el-col :span="7">
             <el-form-item>
-              <div class="sub-title">隧道名称</div>
+              <div class="sub-title">道路名称</div>
               <el-input v-model="defaultForms.tunnelName" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
@@ -1360,7 +1360,7 @@
       <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
         <el-row>
           <div>
-            <el-divider>隧道基本信息</el-divider>
+            <el-divider>道路基本信息</el-divider>
           </div>
         </el-row>
         <el-row>
@@ -1378,7 +1378,7 @@
           </el-col>
           <el-col :span="7">
             <el-form-item>
-              <div class="sub-title">隧道名称</div>
+              <div class="sub-title">道路名称</div>
               <el-input v-model="defaultForms.tunnelName" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
@@ -1503,7 +1503,7 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="">
-              <div class="sub-title">隧道浇筑时间</div>
+              <div class="sub-title">道路浇筑时间</div>
               <el-date-picker
                 v-model="defaultForms.beizhu12"
                 style="width: 200px;"
@@ -1852,7 +1852,7 @@ export default {
         { key: 'secLineFilerTickness', display_name: '二次衬砌厚度-填充' },
         { key: 'projectName', display_name: '项目名称' },
         { key: 'sectionName', display_name: '标段名称' },
-        { key: 'tunnelName', display_name: '隧道名称' },
+        { key: 'tunnelName', display_name: '道路名称' },
         { key: 'worksiteName', display_name: '工点名称' },
         { key: 'statute', display_name: '状态' }
 

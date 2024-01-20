@@ -38,7 +38,7 @@
               </div>
               <div class="card-panel-description">
                 <div class="card-panel-text">
-                  隧道的检测方案
+                  道路的检测方案
                 </div>
                 <count-to :start-val="0" :end-val="th2" :duration="3000" class="card-panel-num" />
               </div>

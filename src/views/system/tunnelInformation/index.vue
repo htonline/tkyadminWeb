@@ -1,5 +1,5 @@
 <template>
-  <!--  隧道衬砌信息管理 - 隧道信息管理 -->
+  <!--  道路衬砌信息管理 - 道路信息管理 -->
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">
@@ -11,10 +11,10 @@
         <el-input v-model="query.projectName" clearable placeholder="项目名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">标段名称</label>
         <el-input v-model="query.sectionName" clearable placeholder="标段名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道编号</label>
-        <el-input v-model="query.tunnelId" clearable placeholder="隧道编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道名称</label>
-        <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路编号</label>
+        <el-input v-model="query.tunnelId" clearable placeholder="道路编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路名称</label>
+        <el-input v-model="query.tunnelName" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">工点名称</label>
         <el-input v-model="query.worksiteName" clearable placeholder="工点名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">建设单位</label>
@@ -34,8 +34,8 @@
         <label class="el-form-item-label">数据新增时间</label>
         <el-input v-model="query.time" clearable placeholder="数据新增时间" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
        -->
-        <label class="el-form-item-label">隧道名称</label>
-        <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路名称</label>
+        <el-input v-model="query.tunnelName" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <rrOperation :crud="crud" />
 
       </div>
@@ -55,22 +55,22 @@
           <el-form-item label="标段名称">
             <el-input v-model="form.sectionName" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道编号">
+          <el-form-item label="道路编号">
             <el-input v-model="form.tunnelId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道名称">
+          <el-form-item label="道路名称">
             <el-input v-model="form.tunnelName" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="工点名称">
             <el-input v-model="form.worksiteName" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道起始里程">
+          <el-form-item label="道路起始里程">
             <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu1" style="width: 140px;" /><span> + </span><el-input v-model="form.beizhu5" style="width: 140px;" />
           </el-form-item>
-          <el-form-item label="隧道结束里程">
+          <el-form-item label="道路结束里程">
             <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu2" style="width: 140px;" /><span> + </span><el-input v-model="form.beizhu6" style="width: 140px;" />
           </el-form-item>
-          <el-form-item label="隧道长度">
+          <el-form-item label="道路长度">
             <el-input v-model="form.tunnelLength" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="上传附件材料" enctype="multipart/form-data">
@@ -179,12 +179,12 @@
         <el-table-column prop="tunnelInforId" label="序号" />
         <el-table-column prop="projectName" label="项目名称" />
         <el-table-column prop="sectionName" label="标段名称" />
-        <el-table-column prop="tunnelId" label="隧道编号" />
-        <el-table-column prop="tunnelName" label="隧道名称" />
+        <el-table-column prop="tunnelId" label="道路编号" />
+        <el-table-column prop="tunnelName" label="道路名称" />
         <el-table-column prop="worksiteName" label="工点名称" />
-        <el-table-column prop="tunnelStartingDistance" label="隧道起始里程" />
-        <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
-        <el-table-column prop="tunnelLength" label="隧道长度" />
+        <el-table-column prop="tunnelStartingDistance" label="道路起始里程" />
+        <el-table-column prop="tunnelEndingDistance" label="道路结束里程" />
+        <el-table-column prop="tunnelLength" label="道路长度" />
         <el-table-column label="附件材料" width="150px" align="center">
           <template slot-scope="scopes">
             <el-button
@@ -329,7 +329,7 @@ export default {
   components: { pagination, crudOperation, rrOperation, udOperation },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   cruds() {
-    return CRUD({ title: '隧道信息', url: 'api/tunnelInformation', idField: 'tunnelInforId', sort: 'tunnelInforId,desc', crudMethod: { ...crudTunnelInformation }})
+    return CRUD({ title: '道路信息', url: 'api/tunnelInformation', idField: 'tunnelInforId', sort: 'tunnelInforId,desc', crudMethod: { ...crudTunnelInformation }})
   },
   data() {
     return {
@@ -349,8 +349,8 @@ export default {
         { key: 'tunnelInforId', display_name: 'ID' },
         { key: 'projectName', display_name: '项目名称' },
         { key: 'sectionName', display_name: '标段名称' },
-        { key: 'tunnelId', display_name: '隧道编号' },
-        { key: 'tunnelName', display_name: '隧道名称' },
+        { key: 'tunnelId', display_name: '道路编号' },
+        { key: 'tunnelName', display_name: '道路名称' },
         { key: 'worksiteName', display_name: '工点名称' },
         { key: 'repairCompany', display_name: '建设单位' },
         { key: 'supervisionCompany', display_name: '监理单位' },
@@ -435,7 +435,7 @@ export default {
     // 改变状态
     updateStatus(data, status) {
       if (status === '未发布') {
-        this.$confirm('是否发布隧道信息？', '是否继续？', '提示', {
+        this.$confirm('是否发布道路信息？', '是否继续？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
@@ -446,7 +446,7 @@ export default {
           })
         })
       } else {
-        this.$confirm('是否取消发布隧道信息？', '是否继续？', '提示', {
+        this.$confirm('是否取消发布道路信息？', '是否继续？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

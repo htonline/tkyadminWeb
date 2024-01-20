@@ -98,7 +98,7 @@
           <el-form-item label="道路名称">
             <el-input v-model="form.remark" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="对应的病害信息表ID">
+          <el-form-item label="TunnelID">
             <el-input v-model="form.remark1" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="备注">
@@ -142,7 +142,7 @@
         <el-table-column prop="updateBy" label="更新者" />
         <el-table-column prop="updateTime" label="更新时间" />
         <el-table-column prop="remark" label="道路名称" />
-        <el-table-column prop="remark1" label="对应的病害信息表ID" />
+        <el-table-column prop="remark1" label="TunnelID" />
         <el-table-column prop="remark2" label="备注" />
         <el-table-column prop="remark3" label="备注" />
         <el-table-column prop="remark4" label="备注" />
@@ -221,7 +221,7 @@ export default {
         { key: 'createBy', display_name: '创建者' },
         { key: 'updateBy', display_name: '更新者' },
         { key: 'remark', display_name: '道路名称' },
-        { key: 'remark1', display_name: '对应的病害信息表ID' },
+        { key: 'remark1', display_name: 'TunnelID' },
         { key: 'remark2', display_name: '备注' },
         { key: 'remark3', display_name: '备注' },
         { key: 'remark4', display_name: '备注' },

@@ -50,7 +50,7 @@ export default {
 
       this.chart.setOption({
         title: {
-          text: '隧道',
+          text: '道路',
           subtext: '已报检长度:12561米',
           left: 'center'
         },
@@ -73,7 +73,7 @@ export default {
         color: ['#04471f', '#c23531'],
         series: [
           {
-            name: '隧道检测长度',
+            name: '道路检测长度',
             type: 'pie',
             radius: '50%',
             data: [

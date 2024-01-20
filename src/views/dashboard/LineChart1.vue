@@ -84,7 +84,7 @@ export default {
           }
         ],
         legend: {
-          data: ['已检隧道（座）', '缺陷隧道（座）', '已检隧道（座） ', '缺陷隧道（座） ']
+          data: ['已检道路（座）', '缺陷道路（座）', '已检道路（座） ', '缺陷道路（座） ']
         },
         xAxis: {
           data: [30, 52, 200, 334, 390, 330, 220],
@@ -104,7 +104,7 @@ export default {
         series: [
           {
             type: 'bar',
-            name: '已检隧道（座）',
+            name: '已检道路（座）',
             color: '#1e634d',
             data: [30, 52, 200, 334, 390, 330, 220],
             // Set `large` for large data amount
@@ -112,7 +112,7 @@ export default {
           },
           {
             type: 'line',
-            name: '缺陷隧道（座）',
+            name: '缺陷道路（座）',
             color: '#eecf06',
             data: [30, 52, 200, 334, 390, 330, 220],
             // Set `large` for large data amount
@@ -120,7 +120,7 @@ export default {
           },
           {
             type: 'bar',
-            name: '已检隧道（座） ',
+            name: '已检道路（座） ',
             color: '#8b5227',
             data: [37, 57, 210, 634, 396, 230, 120],
             // Set `large` for large data amount
@@ -128,7 +128,7 @@ export default {
           },
           {
             type: 'line',
-            name: '缺陷隧道（座） ',
+            name: '缺陷道路（座） ',
             color: '#a50a40',
             data: [37, 57, 210, 634, 396, 230, 120],
             // Set `large` for large data amount

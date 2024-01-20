@@ -1,11 +1,11 @@
 <template>
   <div class="app-container">
     <!--工具栏-->
-    <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="隧道信息" append-to-body width="1300px" @close="cancel">
+    <el-dialog :visible.sync="dialog" :close-on-click-modal="false" :before-close="cancel" title="道路信息" append-to-body width="1300px" @close="cancel">
     <div class="head-container">
       <div >
-        <label class="el-form-item-label">隧道名称</label>
-        <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" ref="tunnelName"/>
+        <label class="el-form-item-label">道路名称</label>
+        <el-input v-model="query.tunnelName" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" ref="tunnelName"/>
         <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="serach()">搜索</el-button>
       </div>
     <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
@@ -14,12 +14,12 @@
       <el-table ref="table" v-loading="crud.loading" :data="Data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column prop="projectName" label="项目名称" />
         <el-table-column prop="sectionName" label="标段名称" />
-        <el-table-column prop="tunnelId" label="隧道编号" />
-        <el-table-column prop="tunnelName" label="隧道名称" />
+        <el-table-column prop="tunnelId" label="道路编号" />
+        <el-table-column prop="tunnelName" label="道路名称" />
         <el-table-column prop="worksiteName" label="工点名称" />
-        <el-table-column prop="tunnelStartingDistance" label="隧道起始里程" />
-        <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
-        <el-table-column prop="tunnelLength" label="隧道长度" />
+        <el-table-column prop="tunnelStartingDistance" label="道路起始里程" />
+        <el-table-column prop="tunnelEndingDistance" label="道路结束里程" />
+        <el-table-column prop="tunnelLength" label="道路长度" />
         <el-table-column  label="附件材料" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
@@ -95,7 +95,7 @@
         <el-form ref="defaultForms"  :model="defaultForms" :rules="rules"   size="small" label-width="80px">
           <el-row>
             <div>
-              <el-divider>隧道基本信息</el-divider>
+              <el-divider>道路基本信息</el-divider>
             </div>
           </el-row>
           <el-row >
@@ -113,7 +113,7 @@
             </el-col>
             <el-col :span="7">
               <el-form-item >
-                <div class="sub-title">隧道名称</div>
+                <div class="sub-title">道路名称</div>
                 <el-input v-model="defaultForms.tunnelName" style="width: 250px;" />
               </el-form-item>
             </el-col>
@@ -333,7 +333,7 @@
             <!--
             <el-col :span="6">
               <el-form-item label="">
-                <div class="sub-title">隧道浇筑时间</div>
+                <div class="sub-title">道路浇筑时间</div>
                 <el-date-picker
                   v-model="defaultForms.beizhu12"
                   type="datetime"
@@ -391,7 +391,7 @@ export default {
   components: { pagination, crudOperation, rrOperation, udOperation },
   mixins: [presenter(), header(), form(defaultForm), crud()],
   cruds() {
-    return CRUD({ title: '隧道信息', url: 'api/tunnelInformation', idField: 'tunnelInforId', sort: 'tunnelInforId,desc', crudMethod: { ...crudTunnelInformation }})
+    return CRUD({ title: '道路信息', url: 'api/tunnelInformation', idField: 'tunnelInforId', sort: 'tunnelInforId,desc', crudMethod: { ...crudTunnelInformation }})
   },
   data() {
     return {
@@ -472,8 +472,8 @@ export default {
         { key: 'tunnelInforId', display_name: 'ID' },
         { key: 'projectName', display_name: '项目名称' },
         { key: 'sectionName', display_name: '标段名称' },
-        { key: 'tunnelId', display_name: '隧道编号' },
-        { key: 'tunnelName', display_name: '隧道名称' },
+        { key: 'tunnelId', display_name: '道路编号' },
+        { key: 'tunnelName', display_name: '道路名称' },
         { key: 'worksiteName', display_name: '工点名称' },
         { key: 'repairCompany', display_name: '建设单位' },
         { key: 'supervisionCompany', display_name: '监理单位' },

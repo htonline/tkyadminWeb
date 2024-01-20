@@ -103,7 +103,7 @@ export default {
         series: [
           {
             type: 'bar',
-            name: '隧道（米）',
+            name: '道路（米）',
             data: [30, 52, 200, 334, 390, 330, 220],
             // Set `large` for large data amount
             large: true

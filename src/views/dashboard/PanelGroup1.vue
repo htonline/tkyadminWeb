@@ -9,7 +9,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            隧道信息（座）
+            道路信息（座）
           </div>
           <count-to :start-val="0" :end-val="th1" :duration="2000" class="card-panel-num" />
         </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            隧道总长度（米）
+            道路总长度（米）
           </div>
           <count-to :start-val="0" :end-val="th2" :duration="3000" class="card-panel-num" />
         </div>

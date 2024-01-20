@@ -4,8 +4,8 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <label class="el-form-item-label">隧道ID</label>
-        <el-input v-model="query.tunnelId" clearable placeholder="隧道ID" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路ID</label>
+        <el-input v-model="query.tunnelId" clearable placeholder="道路ID" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">检测位置的名称</label>
         <el-input v-model="query.detectLocation" clearable placeholder="检测位置的名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">检测位置的经度</label>
@@ -18,22 +18,22 @@
         <el-input v-model="query.city" clearable placeholder="城市" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">区域</label>
         <el-input v-model="query.district" clearable placeholder="区域" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道的病害类型</label>
-        <el-input v-model="query.diseaseType" clearable placeholder="隧道的病害类型" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路的病害类型</label>
+        <el-input v-model="query.diseaseType" clearable placeholder="道路的病害类型" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">病害描述</label>
         <el-input v-model="query.diseaseDescription" clearable placeholder="病害描述" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">病害的修复方法</label>
         <el-input v-model="query.repairMethod" clearable placeholder="病害的修复方法" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">该隧道病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）</label>
-        <el-input v-model="query.tunnelState" clearable placeholder="该隧道病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道起点的经度</label>
-        <el-input v-model="query.tunnelStartPointLng" clearable placeholder="隧道起点的经度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道起点的纬度</label>
-        <el-input v-model="query.tunnelStartPointLat" clearable placeholder="隧道起点的纬度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道终点的经度</label>
-        <el-input v-model="query.tunnelStopPointLng" clearable placeholder="隧道终点的经度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道终点的纬度</label>
-        <el-input v-model="query.tunnelStopPointLat" clearable placeholder="隧道终点的纬度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">该道路病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）</label>
+        <el-input v-model="query.tunnelState" clearable placeholder="该道路病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路起点的经度</label>
+        <el-input v-model="query.tunnelStartPointLng" clearable placeholder="道路起点的经度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路起点的纬度</label>
+        <el-input v-model="query.tunnelStartPointLat" clearable placeholder="道路起点的纬度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路终点的经度</label>
+        <el-input v-model="query.tunnelStopPointLng" clearable placeholder="道路终点的经度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路终点的纬度</label>
+        <el-input v-model="query.tunnelStopPointLat" clearable placeholder="道路终点的纬度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
 <!--        <label class="el-form-item-label">备注</label>-->
 <!--        <el-input v-model="query.remark" clearable placeholder="备注" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
 <!--        <label class="el-form-item-label">备注</label>-->
@@ -59,7 +59,7 @@
       <!--表单组件-->
       <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
-          <el-form-item label="隧道ID">
+          <el-form-item label="道路ID">
             <el-input v-model="form.tunnelId" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="检测位置的名称">
@@ -80,7 +80,7 @@
           <el-form-item label="区域">
             <el-input v-model="form.district" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道的病害类型">
+          <el-form-item label="道路的病害类型">
             <el-input v-model="form.diseaseType" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="病害描述">
@@ -89,19 +89,19 @@
           <el-form-item label="病害的修复方法">
             <el-input v-model="form.repairMethod" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="该隧道病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）">
+          <el-form-item label="该道路病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）">
             <el-input v-model="form.tunnelState" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道起点的经度">
+          <el-form-item label="道路起点的经度">
             <el-input v-model="form.tunnelStartPointLng" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道起点的纬度">
+          <el-form-item label="道路起点的纬度">
             <el-input v-model="form.tunnelStartPointLat" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道终点的经度">
+          <el-form-item label="道路终点的经度">
             <el-input v-model="form.tunnelStopPointLng" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道终点的纬度">
+          <el-form-item label="道路终点的纬度">
             <el-input v-model="form.tunnelStopPointLat" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="创建时间">
@@ -143,21 +143,21 @@
       <!--表格渲染-->
       <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
-        <el-table-column prop="tunnelId" label="隧道ID" />
+        <el-table-column prop="tunnelId" label="道路ID" />
         <el-table-column prop="detectLocation" label="检测位置的名称" />
         <el-table-column prop="detectLocationLng" label="检测位置的经度" />
         <el-table-column prop="detectLocationLat" label="检测位置的纬度" />
         <el-table-column prop="province" label="检测位置所属的省份" />
         <el-table-column prop="city" label="城市" />
         <el-table-column prop="district" label="区域" />
-        <el-table-column prop="diseaseType" label="隧道的病害类型" />
+        <el-table-column prop="diseaseType" label="道路的病害类型" />
         <el-table-column prop="diseaseDescription" label="病害描述" />
         <el-table-column prop="repairMethod" label="病害的修复方法" />
-        <el-table-column prop="tunnelState" label="该隧道病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）" />
-        <el-table-column prop="tunnelStartPointLng" label="隧道起点的经度" />
-        <el-table-column prop="tunnelStartPointLat" label="隧道起点的纬度" />
-        <el-table-column prop="tunnelStopPointLng" label="隧道终点的经度" />
-        <el-table-column prop="tunnelStopPointLat" label="隧道终点的纬度" />
+        <el-table-column prop="tunnelState" label="该道路病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）" />
+        <el-table-column prop="tunnelStartPointLng" label="道路起点的经度" />
+        <el-table-column prop="tunnelStartPointLat" label="道路起点的纬度" />
+        <el-table-column prop="tunnelStopPointLng" label="道路终点的经度" />
+        <el-table-column prop="tunnelStopPointLat" label="道路终点的纬度" />
         <el-table-column prop="createTime" label="创建时间" />
         <el-table-column prop="remark" label="备注" />
         <el-table-column prop="remark1" label="备注" />
@@ -209,21 +209,21 @@ export default {
       rules: {
       },
       queryTypeOptions: [
-        { key: 'tunnelId', display_name: '隧道ID' },
+        { key: 'tunnelId', display_name: '道路ID' },
         { key: 'detectLocation', display_name: '检测位置的名称' },
         { key: 'detectLocationLng', display_name: '检测位置的经度(标红点的位置)' },
         { key: 'detectLocationLat', display_name: '检测位置的纬度(标红点的位置)' },
         { key: 'province', display_name: '检测位置所属的省份' },
         { key: 'city', display_name: '城市' },
         { key: 'district', display_name: '区域' },
-        { key: 'diseaseType', display_name: '隧道的病害类型' },
+        { key: 'diseaseType', display_name: '道路的病害类型' },
         { key: 'diseaseDescription', display_name: '病害描述' },
         { key: 'repairMethod', display_name: '病害的修复方法' },
-        { key: 'tunnelState', display_name: '该隧道病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）' },
-        { key: 'tunnelStartPointLng', display_name: '隧道起点的经度' },
-        { key: 'tunnelStartPointLat', display_name: '隧道起点的纬度' },
-        { key: 'tunnelStopPointLng', display_name: '隧道终点的经度' },
-        { key: 'tunnelStopPointLat', display_name: '隧道终点的纬度' },
+        { key: 'tunnelState', display_name: '该道路病害的修复状态（1：紧急；2：一般；3：正在修复；4：已修复）' },
+        { key: 'tunnelStartPointLng', display_name: '道路起点的经度' },
+        { key: 'tunnelStartPointLat', display_name: '道路起点的纬度' },
+        { key: 'tunnelStopPointLng', display_name: '道路终点的经度' },
+        { key: 'tunnelStopPointLat', display_name: '道路终点的纬度' },
         { key: 'remark', display_name: '备注' },
         { key: 'remark1', display_name: '备注' },
         { key: 'remark2', display_name: '备注' },

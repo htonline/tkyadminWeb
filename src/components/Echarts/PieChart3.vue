@@ -73,7 +73,7 @@ export default {
         color: ['#587fb1', '#c23531'],
         series: [
           {
-            name: '隧道检测长度',
+            name: '道路检测长度',
             type: 'pie',
             radius: '50%',
             data: [

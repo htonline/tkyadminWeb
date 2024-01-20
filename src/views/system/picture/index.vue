@@ -8,8 +8,8 @@
         <el-input v-model="query.pictureId" clearable placeholder="文件id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">文件路径</label>
         <el-input v-model="query.url" clearable placeholder="文件路径" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">文件对应的隧道id</label>
-        <el-input v-model="query.tunnelId" clearable placeholder="文件对应的隧道id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">文件对应的道路id</label>
+        <el-input v-model="query.tunnelId" clearable placeholder="文件对应的道路id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">图片名称</label>
         <el-input v-model="query.remark" clearable placeholder="图片名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">备注</label>
@@ -41,7 +41,7 @@
           <el-form-item label="文件路径">
             <el-input v-model="form.url" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="文件对应的隧道id">
+          <el-form-item label="文件对应的道路id">
             <el-input v-model="form.tunnelId" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="现场照片">
@@ -86,7 +86,7 @@
         <el-table-column type="selection" width="55" />
         <el-table-column prop="pictureId" label="文件id" />
         <el-table-column prop="url" label="文件路径" />
-        <el-table-column prop="tunnelId" label="文件对应的隧道id" />
+        <el-table-column prop="tunnelId" label="文件对应的道路id" />
         <el-table-column prop="remark" label="图片名称" />
         <el-table-column prop="remark1" label="备注" />
         <el-table-column prop="remark2" label="备注" />
@@ -168,7 +168,7 @@ export default {
       queryTypeOptions: [
         { key: 'pictureId', display_name: '文件id' },
         { key: 'url', display_name: '文件路径' },
-        { key: 'tunnelId', display_name: '文件对应的隧道id' },
+        { key: 'tunnelId', display_name: '文件对应的道路id' },
         { key: 'remark', display_name: '图片名称' },
         { key: 'remark1', display_name: '备注' },
         { key: 'remark2', display_name: '备注' },

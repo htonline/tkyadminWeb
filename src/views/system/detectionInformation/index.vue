@@ -11,10 +11,10 @@
         <el-input v-model="query.projectName" clearable placeholder="项目名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">标段名称</label>
         <el-input v-model="query.sectionName" clearable placeholder="标段名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道编号</label>
-        <el-input v-model="query.tunnelId" clearable placeholder="隧道编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">隧道名称</label>
-        <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路编号</label>
+        <el-input v-model="query.tunnelId" clearable placeholder="道路编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">道路名称</label>
+        <el-input v-model="query.tunnelName" clearable placeholder="道路名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">工点名称</label>
         <el-input v-model="query.worksiteName" clearable placeholder="工点名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">数据新增时间</label>
@@ -49,10 +49,10 @@
           <el-form-item label="标段名称">
             <el-input v-model="form.sectionName" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道编号">
+          <el-form-item label="道路编号">
             <el-input v-model="form.tunnelId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="隧道名称">
+          <el-form-item label="道路名称">
             <el-input v-model="form.tunnelName" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="工点名称">
@@ -148,8 +148,8 @@
         <el-table-column prop="detectionId" label="ID" />
         <el-table-column prop="projectName" label="项目名称" />
         <el-table-column prop="sectionName" label="标段名称" />
-        <el-table-column prop="tunnelId" label="隧道编号" />
-        <el-table-column prop="tunnelName" label="隧道名称" />
+        <el-table-column prop="tunnelId" label="道路编号" />
+        <el-table-column prop="tunnelName" label="道路名称" />
         <el-table-column prop="worksiteName" label="工点名称" />
         <el-table-column prop="detectionStartingDistance" label="检测起点" />
         <el-table-column prop="detectionEndingDistance" label="检测终点" />
@@ -336,8 +336,8 @@ export default {
         { key: 'detectionId', display_name: 'ID' },
         { key: 'projectName', display_name: '项目名称' },
         { key: 'sectionName', display_name: '标段名称' },
-        { key: 'tunnelId', display_name: '隧道编号' },
-        { key: 'tunnelName', display_name: '隧道名称' },
+        { key: 'tunnelId', display_name: '道路编号' },
+        { key: 'tunnelName', display_name: '道路名称' },
         { key: 'worksiteName', display_name: '工点名称' },
         { key: 'time', display_name: '数据新增时间' },
         { key: 'testId', display_name: '报检号' },
