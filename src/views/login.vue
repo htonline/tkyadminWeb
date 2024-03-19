@@ -1,5 +1,6 @@
 <template>
   <div class="login" :style="'background-image:url('+ Background +');'">
+    <img :src="logo_school" alt="hhhhhhhhh" style="width:380px;" class="logo_school">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-position="left" label-width="0px" class="login-form">
 
       <!--
@@ -57,10 +58,12 @@ import Cookies from 'js-cookie'
 import qs from 'qs'
 import Background from '@/assets/images/background1.jpg'
 import Logo from '@/assets/images/u7_1.png'
+import logo_school from '@/assets/images/logo-school.png'
 export default {
   name: 'Login',
   data() {
     return {
+      logo_school: logo_school,
       logo: Logo,
       Background: Background,
       codeUrl: '',
@@ -73,9 +76,9 @@ export default {
         uuid: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
-        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }],
-        code: [{ required: true, trigger: 'change', message: '验证码不能为空' }]
+        username: [{required: true, trigger: 'blur', message: '用户名不能为空'}],
+        password: [{required: true, trigger: 'blur', message: '密码不能为空'}],
+        code: [{required: true, trigger: 'change', message: '验证码不能为空'}]
       },
       loading: false,
       redirect: undefined
@@ -83,13 +86,13 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         const data = route.query
         if (data && data.redirect) {
           this.redirect = data.redirect
           delete data.redirect
           if (JSON.stringify(data) !== '{}') {
-            this.redirect = this.redirect + '&' + qs.stringify(data, { indices: false })
+            this.redirect = this.redirect + '&' + qs.stringify(data, {indices: false})
           }
         }
       },
@@ -143,9 +146,9 @@ export default {
           this.loading = true
           // 如果点了记住我
           if (user.rememberMe) {
-            Cookies.set('username', user.username, { expires: Config.passCookieExpires })
-            Cookies.set('password', user.password, { expires: Config.passCookieExpires })
-            Cookies.set('rememberMe', user.rememberMe, { expires: Config.passCookieExpires })
+            Cookies.set('username', user.username, {expires: Config.passCookieExpires})
+            Cookies.set('password', user.password, {expires: Config.passCookieExpires})
+            Cookies.set('rememberMe', user.rememberMe, {expires: Config.passCookieExpires})
           } else {
             Cookies.remove('username')
             Cookies.remove('password')
@@ -154,7 +157,7 @@ export default {
           // 跳转
           this.$store.dispatch('Login', user).then(() => {
             this.loading = false
-            this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({path: this.redirect || '/'})
           }).catch(() => {
             this.loading = false
             this.getCode()
@@ -182,47 +185,64 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-  .login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-size: cover;
-  }
-  .title {
-    margin: 0 auto 30px auto;
-    text-align: center;
-    color: #707070;
+.login {
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-size: cover;
+}
+
+.title {
+  margin: 0 auto 30px auto;
+  text-align: center;
+  color: #707070;
+}
+
+.login-form {
+  border-radius: 6px;
+  background: #ffffff;
+  width: 385px;
+  padding: 25px 25px 5px 25px;
+
+  .el-input {
+    height: 38px;
+
+    input {
+      height: 38px;
+    }
   }
 
-  .login-form {
-    border-radius: 6px;
-    background: #ffffff;
-    width: 385px;
-    padding: 25px 25px 5px 25px;
-    .el-input {
-      height: 38px;
-      input {
-        height: 38px;
-      }
-    }
-    .input-icon{
-      height: 39px;width: 14px;margin-left: 2px;
-    }
+  .input-icon {
+    height: 39px;
+    width: 14px;
+    margin-left: 2px;
   }
-  .login-tip {
-    font-size: 13px;
-    text-align: center;
-    color: #bfbfbf;
+}
+
+.login-tip {
+  font-size: 13px;
+  text-align: center;
+  color: #bfbfbf;
+}
+
+.login-code {
+  width: 33%;
+  display: inline-block;
+  height: 38px;
+  float: right;
+
+  img {
+    cursor: pointer;
+    vertical-align: middle
   }
-  .login-code {
-    width: 33%;
-    display: inline-block;
-    height: 38px;
-    float: right;
-    img{
-      cursor: pointer;
-      vertical-align:middle
-    }
-  }
+}
+
+.logo_school {
+  position: relative;
+  margin-left: 0px;
+  margin-top: 165px;
+  border-radius: 10px;
+}
 </style>
