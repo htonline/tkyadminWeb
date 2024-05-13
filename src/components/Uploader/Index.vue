@@ -13,6 +13,18 @@
       <uploader-unsupport></uploader-unsupport>
       <uploader-drop>
         <p>将文件拖放到此处以上传(<span style="color: red;">文件上传完成之前, 请不要离开本页面！！！</span>)</p>
+        <el-select v-model="selectedThresholdValue" placeholder="请选择阈值" @change="thresholdValue" clearable="">
+          <el-option label="10" value="10"></el-option>
+          <el-option label="20" value="20"></el-option>
+          <el-option label="30" value="30"></el-option>
+          <el-option label="40" value="40"></el-option>
+          <el-option label="50" value="50"></el-option>
+          <el-option label="60" value="60"></el-option>
+          <el-option label="70" value="70"></el-option>
+          <el-option label="80" value="80"></el-option>
+          <el-option label="90" value="90"></el-option>
+          <el-option label="100" value="100"></el-option>
+        </el-select>
         <uploader-btn>选择文件</uploader-btn>
 <!--        <uploader-btn :attrs="attrs">选择图片</uploader-btn>-->
 <!--        <uploader-btn :directory="true">选择文件夹</uploader-btn>-->
@@ -35,6 +47,7 @@ import { getToken } from '@/utils/auth'
 export default {
   data() {
     return {
+      selectedThresholdValue: null,
       skip: false,
       options: {
         // localhost 本地测试用这个
@@ -85,6 +98,9 @@ export default {
     }
   },
   methods: {
+    thresholdValue() {
+      console.log('选中阈值:', this.selectedThresholdValue)
+    },
     fileSuccess(rootFile, file, response, chunk) {
       // console.log(rootFile);
       // console.log(file);
@@ -102,7 +118,8 @@ export default {
             {
               identifier: file.uniqueIdentifier,
               filename: file.name,
-              totalChunks: chunk.offset
+              totalChunks: chunk.offset,
+              selectedThresholdValue: this.selectedThresholdValue
             },
             {
               headers: { 'Authorization': getToken() }
@@ -127,8 +144,7 @@ export default {
     },
     fileComplete(rootFile) {
       // 一个根文件（文件夹）成功上传完成。
-      // console.log('fileComplete', rootFile);
-      // console.log('一个根文件（文件夹）成功上传完成。');
+      console.log('fileComplete', rootFile)
     },
     complete() {
       // 上传完毕。
@@ -137,6 +153,9 @@ export default {
     filesAdded(file, fileList, event) {
       // console.log(file);
       file.forEach((e) => {
+        // 将所选选项添加到文件对象中
+        e.selectedThresholdValue = this.selectedThresholdValue
+        console.log('selectedThresholdValue', this.selectedThresholdValue)
         this.fileList.push(e)
         this.computeMD5(e)
       })
