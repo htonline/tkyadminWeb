@@ -75,6 +75,12 @@ export default {
         headers: {
           // 在header中添加的验证，请根据实际业务来
           'Authorization': getToken()
+        },
+        // 在每次上传分片时传递 selectedThresholdValue
+        query: (file) => {
+          return {
+            selectedThresholdValue: file.selectedThresholdValue
+          }
         }
       },
       attrs: {
