@@ -8,8 +8,8 @@
         <el-input v-model="query.pictureId" clearable placeholder="文件id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">文件路径</label>
         <el-input v-model="query.url" clearable placeholder="文件路径" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">文件对应的道路id</label>
-        <el-input v-model="query.tunnelId" clearable placeholder="文件对应的道路id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <label class="el-form-item-label">文件对应的道路序号</label>
+        <el-input v-model="query.disNumber" clearable placeholder="文件对应的道路id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">图片名称</label>
         <el-input v-model="query.remark" clearable placeholder="图片名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">备注</label>
@@ -41,8 +41,8 @@
           <el-form-item label="文件路径">
             <el-input v-model="form.url" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="文件对应的道路id">
-            <el-input v-model="form.tunnelId" style="width: 370px;" />
+          <el-form-item label="道路序号">
+            <el-input v-model="form.disNumber" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="现场照片">
             <el-button style="margin-left: 10px;" size="small" type="primary" @click="submit">上传照片</el-button>
@@ -86,7 +86,7 @@
         <el-table-column type="selection" width="55" />
         <el-table-column prop="pictureId" label="文件id" />
         <el-table-column prop="url" label="文件路径" />
-        <el-table-column prop="tunnelId" label="文件对应的道路id" />
+        <el-table-column prop="disNumber" label="道路序号" />
         <el-table-column prop="remark" label="图片名称" />
         <el-table-column prop="remark1" label="备注" />
         <el-table-column prop="remark2" label="备注" />
@@ -113,7 +113,7 @@
           ref="upload"
           multiple
           class="upload-demo"
-          :action="scenePictureUploadApi+'?pictureId='+form.pictureId+'&&url='+form.url+'&&tunnelId='+form.tunnelId+'&&remark='+form.remark+'&&remark1='+form.remark1+'&&remark2='+form.remark2+'&&remark3='+form.remark3+'&&remark4='+form.remark4+'&&remark5='+form.remark5+'&&remark6='+form.remark6+'&&remark7='+form.remark7+'&&remark8='+form.remark8"
+          :action="scenePictureUploadApi+'?pictureId='+form.pictureId+'&&url='+form.url+'&&disNumber='+form.disNumber+'&&remark='+form.remark+'&&remark1='+form.remark1+'&&remark2='+form.remark2+'&&remark3='+form.remark3+'&&remark4='+form.remark4+'&&remark5='+form.remark5+'&&remark6='+form.remark6+'&&remark7='+form.remark7+'&&remark8='+form.remark8"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :auto-upload="false"
@@ -144,7 +144,7 @@ import pagination from '@crud/Pagination'
 import { mapGetters } from 'vuex'
 import { getToken } from '@/utils/auth'
 
-const defaultForm = { pictureId: null, url: null, tunnelId: null, remark: null, remark1: null, remark2: null, remark3: null, remark4: null, remark5: null, remark6: null, remark7: null, remark8: null }
+const defaultForm = { pictureId: null, url: null, disNumber: null, remark: null, remark1: null, remark2: null, remark3: null, remark4: null, remark5: null, remark6: null, remark7: null, remark8: null }
 export default {
   name: 'Picture',
   components: { pagination, crudOperation, rrOperation, udOperation },
@@ -168,7 +168,7 @@ export default {
       queryTypeOptions: [
         { key: 'pictureId', display_name: '文件id' },
         { key: 'url', display_name: '文件路径' },
-        { key: 'tunnelId', display_name: '文件对应的道路id' },
+        { key: 'disNumber', display_name: '文件对应的道路序号' },
         { key: 'remark', display_name: '图片名称' },
         { key: 'remark1', display_name: '备注' },
         { key: 'remark2', display_name: '备注' },

@@ -9,7 +9,7 @@
         <label class="el-form-item-label">文件存储路径</label>
         <el-input v-model="query.fileUrl" clearable placeholder="文件存储路径" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">外键，关联tunel表</label>
-        <el-input v-model="query.tunnelId" clearable placeholder="外键，关联tunel表" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <el-input v-model="query.disNumber" clearable placeholder="道路序号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
 <!--        <label class="el-form-item-label">备注</label>-->
 <!--        <el-input v-model="query.remark1" clearable placeholder="备注" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
 <!--        <label class="el-form-item-label">备注</label>-->
@@ -41,8 +41,8 @@
           <el-form-item label="文件存储路径">
             <el-input v-model="form.fileUrl" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="外键，关联tunel表">
-            <el-input v-model="form.tunnelId" style="width: 370px;" />
+          <el-form-item label="文件对应的道路序号">
+            <el-input v-model="form.disNumber" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="雷达图谱">
             <el-button style="margin-left: 10px;" size="small" type="primary" @click="submit">上传照片</el-button>
@@ -86,7 +86,7 @@
         <el-table-column type="selection" width="55" />
         <el-table-column prop="spectrumId" label="雷达图谱id" />
         <el-table-column prop="fileUrl" label="文件存储路径" />
-        <el-table-column prop="tunnelId" label="外键，关联tunel表" />
+        <el-table-column prop="disNumber" label="外键，关联tunel表" />
         <el-table-column prop="remark" label="备注" />
         <el-table-column prop="remark1" label="备注" />
         <el-table-column prop="remark2" label="备注" />
@@ -113,7 +113,7 @@
           ref="upload"
           multiple
           class="upload-demo"
-          :action="radarSpectrumUploadApi+'?spectrumId='+form.spectrumId+'&&fileUrl='+form.fileUrl+'&&tunnelId='+form.tunnelId+'&&remark='+form.remark+'&&remark1='+form.remark1+'&&remark2='+form.remark2+'&&remark3='+form.remark3+'&&remark4='+form.remark4+'&&remark5='+form.remark5+'&&remark6='+form.remark6+'&&remark7='+form.remark7+'&&remark8='+form.remark8"
+          :action="radarSpectrumUploadApi+'?spectrumId='+form.spectrumId+'&&fileUrl='+form.fileUrl+'&&disNumber='+form.disNumber+'&&remark='+form.remark+'&&remark1='+form.remark1+'&&remark2='+form.remark2+'&&remark3='+form.remark3+'&&remark4='+form.remark4+'&&remark5='+form.remark5+'&&remark6='+form.remark6+'&&remark7='+form.remark7+'&&remark8='+form.remark8"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :auto-upload="false"
@@ -144,7 +144,7 @@ import pagination from '@crud/Pagination'
 import { mapGetters } from 'vuex'
 import { getToken } from '@/utils/auth'
 
-const defaultForm = { spectrumId: null, fileUrl: null, tunnelId: null, remark1: null, remark2: null, remark3: null, remark4: null, remark5: null, remark6: null, remark7: null, remark8: null, remark: null }
+const defaultForm = { spectrumId: null, fileUrl: null, disNumber: null, remark1: null, remark2: null, remark3: null, remark4: null, remark5: null, remark6: null, remark7: null, remark8: null, remark: null }
 export default {
   name: 'PictureRadarSpectrum',
   components: { pagination, crudOperation, rrOperation, udOperation },
@@ -171,7 +171,7 @@ export default {
       queryTypeOptions: [
         { key: 'spectrumId', display_name: '雷达图谱id' },
         { key: 'fileUrl', display_name: '文件存储路径' },
-        { key: 'tunnelId', display_name: '外键，关联tunel表' },
+        { key: 'disNumber', display_name: '文件对应的道路序号' },
         { key: 'remark1', display_name: '备注' },
         { key: 'remark2', display_name: '备注' },
         { key: 'remark3', display_name: '备注' },
