@@ -35,6 +35,8 @@ const api = {
     scenePictureUploadApi: fileUploadBaseURL + '/api/picture/uploadScenePicture',
     // 雷达图谱的上传路径
     radarSpectrumUploadApi: fileUploadBaseURL + '/api/pictureRadarSpectrum/uploadSpectrumPicture',
+    // 病害模型文件的上传路径
+    diseaseModelUploadApi: fileUploadBaseURL + '/api/diseaseModel/uploadDiseaseModel'
   }
 }
 

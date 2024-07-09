@@ -18,6 +18,7 @@ const getters = {
   fileUploadApi: state => state.api.fileUploadApi,
   pictureUploadApi: state => state.api.pictureUploadApi,
   scenePictureUploadApi: state => state.api.scenePictureUploadApi,
+  diseaseModelUploadApi: state => state.api.diseaseModelUploadApi,
   radarSpectrumUploadApi: state => state.api.radarSpectrumUploadApi,
   pictureBaseApi: state => state.api.pictureBaseApi,
   radarFileUploadApi: state => state.api.radarFileUploadApi,
