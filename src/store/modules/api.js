@@ -23,8 +23,6 @@ const api = {
     swaggerApi: baseUrl + '/swagger-ui.html',
     // 文件上传
     fileUploadApi: baseUrl + '/api/localStorage',
-    // baseUrl: http://localhost:8001/
-    baseApi: baseUrl,
     // 预览图请求地址,查找图片的时候：本地调试用这个，找的是自己计算机上的路径，部署到服务器上时，要改成服务器ip
     // =========================除了部署时修改，以上不准再动（......）======================
     // 雷达采集文件上传
